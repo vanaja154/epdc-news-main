@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/109a493327.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="scrolling.css" />
+    <link rel="stylesheet" href="footer.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="phone.css" />
+    <style>
+      .footer {
+        margin-top: 20px;
+      }
+      .container1 {
+        margin-left: 0px;
+      }
+      .right-section {
+        margin-left: 70px;
+      }
+      .sidebar {
+        margin-left: 50px;
+        width: 100px;
+      }
+      .sidebar-item h3 {
+        font-size: 1.1rem;
+      }
+      .sidebar-item {
+        padding-bottom: 1.2rem;
+      }
+      .sidebar-item img {
+        height: 120px;
+      }
+      .news-item a {
+        text-decoration: none;
+        color: black;
+      }
+      .matter {
+        margin-left: 221px;
+        margin-top: -190px;
+      }
+
+      @media (max-width: 800px) {
+        .container1 {
+          flex-direction: column;
+          width: 69%;
+        }
+        .gallery {
+          grid-template-columns: 33% 33% 33%;
+        }
+        .container2 {
+          grid-template-columns: auto;
+          width: 69%;
+        }
+        .matter {
+          top: 38%;
+          left: 41% !important;
+      
+          font-size: 1.2rem;
+        }
+        #addsection{
+          margin-top: -210px;
+         }
+      }
+      @media (max-width: 450px) {
+        .main {
+          flex-direction: column;
+        }
+        .gallery {
+          grid-template-columns: 50% 50%;
+        }
+        .news-item img {
+          width: 80px;
+          height: 100px;
+          margin-left: 12px;
+        }
+        .content img {
+          width: 100%;
+          height: 300px;
+        }
+        .sidebar {
+          margin-top: 20px;
+        }
+        .container1 {
+          margin: 5px;
+          width: 71%;
+        }
+        .gallery-item {
+          height: 180px;
+        }
+        .right-section{
+          margin-left: 0px;
+        }
+        .matter{
+          font-size: 0.8rem;
+          top: 3%;
+        }
+        .content{
+          margin-left: 25px;
+        }
+        
+        h1 {
+        font-size: 2rem;
+         }
+         #addsection{
+          margin-top: -210px;
+         }
+         .mainheader {
+          /* display: block; */
+          /* align-items: center; */
+         }
+         .mainheader h1 {
+          margin: 0;
+          font-size: 10px;
+          color: #9acd32;
+      
+      }
+      .testimonial-wrapper {
+        overflow: hidden;
+      }
+      
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <div th:replace="~{header :: header}"></div>
+
+    <h1 class="gallery-heading" id="gallery">Latest Gallery Pics</h1>
+    <div class="gallery">
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item1')}">
+          <img th:src="${section.image1}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item2')}">
+          <img th:src="${section.image2}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item3')}">
+          <img th:src="${section.image3}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item4')}">
+          <img th:src="${section.image4}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item5')}">
+          <img th:src="${section.image5}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item6')}">
+          <img th:src="${section.image6}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item7')}">
+          <img th:src="${section.image7}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item8')}">
+          <img th:src="${section.image8}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item9')}">
+          <img th:src="${section.image9}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item10')}">
+          <img th:src="${section.image10}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item11')}">
+          <img th:src="${section.image11}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item12')}">
+          <img th:src="${section.image12}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item13')}">
+          <img th:src="${section.image13}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item14')}">
+          <img th:src="${section.image14}" alt="Gallery Item 1" />
+        </a>
+      </div>
+      <div th:each="section : ${fourthSections}" class="gallery-item">
+        <a th:href="@{/details/{id}(id=${section.id}, fourth='item15')}">
+          <img th:src="${section.image15}" alt="Gallery Item 1" />
+        </a>
+      </div>
+    </div>
+
+    <div></div>
+
+    <div th:replace="~{footer :: footer}"></div>
+    <script src="darkmode.js"></script>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+.main-section {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+.content-container {
+    flex: 3;
+    height: 872px;
+}
+
+.sidebar {
+    height: 363px;
+    width: 60%;
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notice {
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    width: 81%;
+    text-align: justify;
+}
+
+#share {
+    width: 24%;
+    height: 13%;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 19px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: -152px;
+    margin-top: 20px;
+}
+
+.donation-image {
+    width: 80%;
+    height: 65%;
+    border-radius: 8px;
+}
+
+.payment-section {
+    margin-top: 15px;
+}
+
+.donate-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.raised-amount {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.raised-amount .amount {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.payment-section img {
+    width: 200px;
+    margin-top: 10px;
+}
+
+.feedback-form {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: -16px;
+    /* margin-top: 38px; */
+    width: 114%;
+}
+
+.feedback-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form select,
+.feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.feedback-form textarea {
+    resize: none;
+}
+
+.submit-feedback {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.submit-feedback:hover {
+    background-color: rgb(6, 185, 6);
+}
+
+/* General Styles for feedback section */
+.approved-feedback-section {
+    /* margin-top: 20px; */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.feedback-carousel {
+    display: flex;
+    overflow: hidden; 
+    width: 100%;
+}
+
+.feedback-card {
+    flex: 0 0 auto; 
+    width: 300px; 
+    margin-right: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideLeft 20s linear infinite; 
+}
+
+.feedback-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Animation: Right to Left */
+@keyframes slideLeft {
+    0% {
+        transform: translateX(100%); 
+    }
+    100% {
+        transform: translateX(-100%); 
+    }
+}
+
+ 
+@media (max-width: 768px) {
+    .main-section {
+        display: block;
+        justify-items: center;
+        align-items: center;
+    }
+    .content-container {
+      margin-left: 30px;
+      width: 100%;
+      height: 100%;
+    }
+    .donate-progress {
+    margin-left: 127px;
+    }
+    .donation-image {
+    width: 94%;
+    height: 343px;
+    }
+    .notice {
+    width: 96%;
+    }
+    footer {
+    margin-top: 45px;
+    }
+    .sidebar {
+    width: 96%;
+    }
+    .approved-feedback-section {
+    margin-top: 520px;
+    }
+    .feedback-card span p {
+        font-size: 12px; 
+    }
+}
+
+@media (max-width: 1024px) {
+    .content-container {
+        margin-left: 30px;
+        width: 100%;
+        height: 100%;
+    }
+}

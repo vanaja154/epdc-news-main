@@ -1,0 +1,44 @@
+body.dark-theme .header {
+    background-color: black; 
+}
+body.dark-theme .ad-banner{
+    background-color: black; 
+    color: white;
+
+}
+body.dark-theme #moon{
+   
+    border-radius: 50px;
+}
+body.dark-theme .content img {
+    background-color: #1A252F;
+}
+body.dark-theme .sidebar-item img{
+
+    background-color: #1A252F;
+}
+body.dark-theme .section {
+    background-color: black;
+    color: white;
+}
+
+body.dark-theme {
+    background: black;
+    color: #ecf0f1; 
+}
+
+body.dark-theme .footer {
+    background-color: #1c2b3a; 
+    color: #f8f9fa; 
+}
+
+body.dark-theme .footer-nav a {
+    color: #f8f9fa; 
+}
+body.dark-theme .footer-section a {
+    color: #f8f9fa; 
+}
+body.dark-theme .footer-bottom{
+    color: #f8f9fa; 
+
+}

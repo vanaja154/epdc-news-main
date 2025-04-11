@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPDC</title>
+    <script src="https://kit.fontawesome.com/109a493327.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="scrolling.css" />
+    <link rel="stylesheet" href="footer.css" />
+    <!-- <link rel="stylesheet" href="darkmode.css" /> -->
+    <link rel="stylesheet" href="phone.css" />
+    <style>
+        .container1 {
+            margin-left: 0px;
+        }
+        .right-section {
+            margin-left: 70px;
+        }
+        .sidebar {
+            margin-left: 50px;
+            width: 100px;
+        }
+        .sidebar-item h3 {
+            font-size: 1.1rem;
+        }
+        .sidebar-item {
+            padding-bottom: 1.2rem;
+        }
+        .sidebar-item img {
+            height: 120px;
+        }
+        .main-editions {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .main-editions h1 {
+            font-size: 24px;
+            text-align: left;
+            margin-bottom: 20px;
+            margin-left: -50px;
+        }
+        .edition-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 100px;
+        }
+        .edition-card {
+            width: 30%;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            margin-left: -50px;
+        }
+        .edition-card img {
+            width: 100%;
+            height: auto;
+        }
+        .edition-title {
+            background-color: #FFC107;
+            padding: 10px;
+            font-size: 18px;
+            color: #000;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .main-editions h1 {
+                font-size: 20px;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .edition-container {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .edition-card {
+                width: 80%;
+                margin-left: 0;
+            }
+
+            .right-section {
+                margin-left: 0;
+                width: 80%;
+                margin-top: 20px;
+            }
+
+            .sidebar {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .sidebar-item img {
+                height: auto;
+                max-width: 100%;
+            }
+            .main-editions {
+        margin-left: 0px;
+    }
+   
+        }
+
+        @media (max-width: 430px) {
+            footer {
+            margin-top: -229px;
+        }
+        }
+        @media (max-width: 1024px) {
+            .edition-container {
+            gap: 69px;
+      }
+      .main-editions h1 {
+    margin-left: -3px;
+      }
+      .edition-card {
+        margin-left: 0px;
+      }
+      /* .main-editions {
+    margin-left: 65px;
+} */
+
+/* .ad-section {
+    margin-left: -104px;
+} */
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{header :: header}"></div>
+
+    <div class="main-editions">
+        <h1>MAIN EDITIONS</h1>
+        <div class="edition-container">
+            <!-- Edition 1 -->
+            <div class="edition-card" th:if="${epaper != null}">
+                <a th:href="${epaper.edition1PdfFile}" target="_blank">
+                    <img th:src="${epaper.edition1Image}" alt="Edition 1 Image" />
+                </a>
+                <div class="edition-title" th:text="${epaper.edition1Title}"></div>
+            </div>
+
+            <!-- Edition 2 -->
+            <div class="edition-card" th:if="${epaper != null}">
+                <a th:href="${epaper.edition2PdfFile}" target="_blank">
+                    <img th:src="${epaper.edition2Image}" alt="Edition 2 Image" />
+                </a>
+                <div class="edition-title" th:text="${epaper.edition2Title}"></div>
+            </div>
+
+            <!-- Advertisement Section -->
+            <div class="right-section" th:if="${epaper != null}">
+                <div class="section ad-section">
+                    <a th:href="${epaper.advertisementLink}" target="_blank">
+                        <img th:src="${epaper.advertisementImage}" alt="Advertisement" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{footer :: footer}"></div>
+
+    <script src="darkmode.js"></script>
+</body>
+</html>

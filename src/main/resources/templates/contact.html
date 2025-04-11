@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPDC</title>
+    <script
+      src="https://kit.fontawesome.com/109a493327.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="donation.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="scrolling.css" />
+    <link rel="stylesheet" href="footer.css" />
+    <!-- <link rel="stylesheet" href="darkmode.css" /> -->
+    <link rel="stylesheet" href="phone.css" />
+    <style>
+      .containerc {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+        border-radius: 8px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .info-box {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-left: 4px solid #9acd32;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .info-box p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:replace="~{header :: header}"></div>
+
+    <div class="containerc">
+      <div class="info-box">
+        <h2>Contact Us</h2>
+        <p>
+          <strong>Address:</strong> Nallakunta, Hyderabad-44,
+        </p>
+        <p><strong>Mobile:</strong>8333949623 , 8179019623</p>
+        <!-- <p><strong>Mobile:</strong>8179019623</p> -->
+
+        <p><strong>Email:</strong>environmentprodevcouncil@gmail.com</p>
+      </div>
+
+      <!-- Feedback Form -->
+      <div class="feedback-form" id="feedback-form">
+        <h3>Feedback Form</h3>
+        <form action="/submit-feedback-user" method="post" id="feedback-form">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Your Name"
+          />
+          <label for="experience">How was your experience?</label>
+          <select id="experience" name="experience">
+            <option value="Excellent">★★★★★ (5 Stars)</option>
+            <option value="Best">★★★★☆ (4 Stars)</option>
+            <option value="Good">★★★☆☆ (3 Stars)</option>
+            <option value="Average">★★☆☆☆ (2 Stars)</option>
+            <option value="Poor">★☆☆☆☆ (1 Star)</option>
+          </select>
+
+          <label for="comments">Comments:</label>
+          <textarea
+            id="comments"
+            name="comments"
+            rows="5"
+            placeholder="Your feedback..."
+          ></textarea>
+
+          <button type="submit" class="submit-feedback">Submit Feedback</button>
+        </form>
+        <!-- Success Message -->
+<div
+th:if="${feedbackSuccess}"
+style="
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #dff0d8;
+  color: #3c763d;
+  border-radius: 4px;
+"
+>
+Thank you for your feedback!
+</div>
+      </div>
+    </div>
+    <div th:replace="~{footer :: footer}"></div>
+    <script src="darkmode.js"></script>
+
+    <script>
+      // JavaScript to show hidden sidebar items
+      function showMore() {
+        const hiddenItems = document.querySelectorAll(".news-item.hidden");
+        hiddenItems.forEach((item) => item.classList.remove("hidden"));
+
+        // Hide the "More" button after showing all items
+        const moreButton = document.getElementById("moreButton");
+        moreButton.style.display = "none";
+      }
+    </script>
+  </body>
+</html>

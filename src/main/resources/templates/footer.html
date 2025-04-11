@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPDC</title>
+    <script src="https://kit.fontawesome.com/d0e6cd014f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="footer.css">
+    <style>
+  
+    </style>
+</head>
+<body>
+<footer th:fragment="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <img src="/images/globe-removebg-preview.png" alt="EPDC Logo" />
+            <div class="social-icons-footer">
+                <a href="https://www.facebook.com/share/167tSVQ9yY/?mibextid=wwXIfr"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/environment_council/profilecard"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://youtube.com/@environmentcouncil?si=2DBOX_u-20v-hitC"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://t.me/epdcindia"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://x.com/epdc225709?s=11"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div class="column">
+                <h3>Categories</h3>
+                <ul>
+                    <!-- <li><a href="/">Home</a></li> -->
+                    <li><a th:href="@{'/category?category=Andhrapradesh'}">Andhra Pradesh</a></li>
+                    <li><a th:href="@{'/category?category=Telangana'}">Telangana</a></li>
+                    <!-- <li><a th:href="@{'/category?category=Movies'}">Movies</a></li> -->
+                    <li><a th:href="@{'/category?category=Environment'}">Environment</a></li>
+                    <li><a th:href="@{'/category?category=Sports'}">Games</a></li>
+                    <li><a th:href="@{'/category?category=Business'}">Business</a></li>
+                    <li><a th:href="@{'/category?category=Family'}">Family</a></li>
+                    <!-- <li><a href="gallery">Photos</a></li> -->
+                    <li><a th:href="@{'/category?category=Health'}">Health</a></li>
+                    <!-- <li><a th:href="@{'/category?category=Prediction'}">Daily Predictions</a></li> -->
+                </ul>
+            </div>
+            <div class="column" id="column">
+                <h3>Popular Topics</h3>
+                <ul>
+                    <!-- <li><a href="#">About Us</a></li>
+                    <li><a href="contact">Contact Us</a></li> -->
+                    <li><a th:href="@{'/category?category=Prediction'}">Daily Predictions</a></li>
+                    <li><a href="/">Latest News</a></li>
+                    <li><a href="contact">Contact Us</a></li>
+                
+                </ul>
+
+                <!-- <div class="social-icons-footer">
+                    <h2>Social Media Links</h2>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                </div> -->
+            </div>
+            <div class="column" id="column">
+                <h3>Our Media</h3>
+                <ul>
+                    <!-- <li><a th:href="@{'/category?category=Education'}">Education</a></li>
+                    <li><a href="epaper">E-Paper</a></li> -->
+                    <li><a th:href="@{'/category?category=Movies'}">Movies</a></li>
+                    <li><a href="gallery">Photos</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Copyright &copy; EPDC @ 2025. All rights reserved.</p>
+        <p> Powered By <a target="_blank" href="https://nuhvin.com/">Nuhvin</a></p>
+    </div>
+
+    
+</footer>
+</body>
+</html>

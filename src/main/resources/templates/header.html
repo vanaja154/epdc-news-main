@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPDC</title>
+    <style></style>
+    <link rel="stylesheet" href="header.css" />
+  </head>
+
+  <body>
+    <div id="overlay" onclick="closeSidebar()"></div>
+    
+    <div class="mainheader">
+      <img src="/images/globe-removebg-preview.png" alt="EPDC Logo" />
+      <h1>Environment Protection Development Council</h1>
+    
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search news by category..."
+          oninput="filterSuggestions()"
+        />
+        <button type="button" id="searchButton" onclick="redirectToCategory()">
+          <i class="fas fa-search"></i>
+        </button>
+        <!-- Dropdown Suggestions -->
+        <div class="dropdown-suggestions" id="suggestionsDropdown">
+          <ul id="suggestionsList"></ul>
+        </div>
+      </div>
+    
+      <script>
+        const categories = [
+          "Andhrapradesh",
+          "Telangana",
+          "Movies",
+          "Environment",
+          "Sports",
+          "Business",
+          "Family",
+          // "Gallery",
+          "Prediction",
+          "Health",
+          // "Epaper",
+          "Education",
+        ];
+  
+        function filterSuggestions() {
+          const input = document.getElementById("searchInput").value.trim().toLowerCase();
+          const suggestionsList = document.getElementById("suggestionsList");
+          const dropdown = document.getElementById("suggestionsDropdown");
+  
+          // Clear previous suggestions
+          suggestionsList.innerHTML = "";
+  
+          if (input.length === 0) {
+            dropdown.style.display = "none";
+            return;
+          }
+  
+          // Filter categories based on input
+          const filteredCategories = categories.filter((category) =>
+            category.toLowerCase().includes(input)
+          );
+  
+          if (filteredCategories.length > 0) {
+            filteredCategories.forEach((category) => {
+              const li = document.createElement("li");
+              li.textContent = category;
+              li.onclick = () => {
+                document.getElementById("searchInput").value = category;
+                redirectToCategory();
+                dropdown.style.display = "none";
+              };
+              suggestionsList.appendChild(li);
+            });
+            dropdown.style.display = "block";
+          } else {
+            dropdown.style.display = "none";
+          }
+        }
+  
+        function redirectToCategory() {
+          const input = document.getElementById("searchInput").value.trim();
+          if (input) {
+            // window.location.href = `/category?category=${encodeURIComponent(input)}`;
+            window.location.href = `/`;
+          }
+        }
+      </script>
+  
+    
+
+
+
+
+    </div>
+    
+    <header>
+      <div class="header-left">
+        <button id="nav-btn" aria-label="Open navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div id="navbar-div">
+          <ul>
+            <li>
+              <a href="/">హోం</a>
+            </li>
+            <li>
+              <div class="dropdown">
+                <button class="dropbtn">రాష్ట్రాలు</button>
+                <div class="dropdown-content">
+                  <a th:href="@{'/category?category=Andhrapradesh'}">ఆంధ్రప్రదేశ్</a>
+                  <a th:href="@{'/category?category=Telangana'}">తెలంగాణ</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a th:href="@{'/category?category=Movies'}">సినిమా</a>
+            </li>
+            <li>
+              <a th:href="@{'/category?category=Environment'}">పర్యావరణం</a>
+            </li>
+            <li>
+              <a th:href="@{'/category?category=Sports'}">క్రీడలు</a>
+            </li>
+            <li>
+              <a th:href="@{'/category?category=Business'}">బిజినెస్</a>
+            </li>
+            <li>
+              <a th:href="@{'/category?category=Family'}">ఫ్యామిలీ</a>
+            </li>
+            <li>
+              <a href="/gallery">ఫొటోలు</a>
+            </li>
+            <!-- <li class="initially-hidden">
+              <a href="">వీడియోలు</a>
+            </li> -->
+            <li >
+              <div class="dropdown">
+                <button class="dropbtn">ఇంకా</button>
+                <div class="dropdown-content">
+                  <a th:href="@{'/category?category=Prediction'}">దిన ఫలాలు</a>
+                </div>
+              </div>
+            </li> 
+            <li >
+              <a th:href="@{'/category?category=Health'}">హెల్త్‌</a>
+            </li>
+            
+            <li class="initially-hidden">
+              <a href="https://epaper.epdcindia.com/" target="_blank">ఈ-పేపర్</a>
+            </li>
+
+            <li class="initially-hidden">
+              <a href="https://blogs.epdcindia.com" target="_blank">బ్లాగ్</a>
+            </li>
+            <li class="initially-hidden">
+              <a th:href="@{'/category?category=Education'}">ఎడ్యుకేషన్</a>
+            </li>
+            <li class="initially-hidden">
+              <a href="/donation">డొనేషన్</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/167tSVQ9yY/?mibextid=wwXIfr"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://x.com/epdc225709?s=11"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.instagram.com/environment_council/profilecard"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://youtube.com/@environmentcouncil?si=2DBOX_u-20v-hitC"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://t.me/epdcindia"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </header>
+
+    <div id="sidebar">
+      <button id="sidebar-close" aria-label=" Close navigation menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    
+      <!-- First Section -->
+      <ul>
+        <li><a href="/">హోం</a></li>
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">రాష్ట్రాలు</button>
+            <div class="dropdown-content">
+              <a th:href="@{'/category?category=Andhrapradesh'}">ఆంధ్రప్రదేశ్</a>
+              <a th:href="@{'/category?category=Telangana'}">తెలంగాణ</a>
+            </div>
+          </div>
+        </li>
+        <li><a th:href="@{'/category?category=Movies'}">సినిమా</a></li>
+        <li><a th:href="@{'/category?category=Environment'}">పర్యావరణం</a></li>
+      </ul>
+    
+      <!-- Second Section -->
+      <ul>
+        <li><a th:href="@{'/category?category=Sports'}">క్రీడలు</a></li>
+        <li><a th:href="@{'/category?category=Business'}">బిజినెస్</a></li>
+        <li><a th:href="@{'/category?category=Family'}">ఫ్యామిలీ</a></li>
+        <li><a href="/gallery">ఫొటోలు</a></li>
+      </ul>
+    
+      <!-- Third Section -->
+      <ul>
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">ఇంకా</button>
+            <div class="dropdown-content">
+              <a th:href="@{'/category?category=Prediction'}">దిన ఫలాలు</a>
+            </div>
+          </div>
+        </li>
+        <li><a th:href="@{'/category?category=Health'}">హెల్త్‌</a></li>
+       
+        <li><a href="https://epaper.epdcindia.com/" target="_blank">ఈ-పేపర్</a></li>
+        <li><a href="https://blogs.epdcindia.com" target="_blank">బ్లాగ్</a></li>
+        <li><a th:href="@{'/category?category=Education'}">ఎడ్యుకేషన్</a></li>
+        <li><a href="/donation">డొనేషన్</a></li>
+      </ul>
+    
+      <!-- Social Media Links -->
+      <ul class="sidebar-social">
+        <li>
+          <a href="https://www.facebook.com/share/167tSVQ9yY/?mibextid=wwXIfr"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        </li>
+        <li>
+          <a href="https://x.com/epdc225709?s=11"><i class="fa-brands fa-twitter"></i> Twitter</a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/environment_council/profilecard">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+        </li>
+        <li>
+          <a href="https://youtube.com/@environmentcouncil?si=2DBOX_u-20v-hitC">
+            <i class="fa-brands fa-youtube"></i> YouTube
+          </a>
+        </li>
+        <li>
+          <a href="https://t.me/epdcindia">
+            <i class="fa-brands fa-telegram"></i> Telegram
+          </a>
+        </li>
+        <li>
+          <a href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"><i class="fa-brands fa-whatsapp"></i> whatsapp</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="ad-banner">
+      <div th:each="content : ${contentList}">
+        <a th:href="@{/detailsadd/{id}(id=${content.id}, addtext='true')}" style="color: black;" >
+          <span th:text="${#strings.abbreviate(content.addText, 100)}"></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- <div th:each="content : ${contentList}">
+      <a th:href="@{/details/{id}(id=${content.id})}">
+        <img
+          class="main-image"
+          th:src="${content.mainImage}"
+          alt="Main image"
+        />
+      </a>
+
+      <a th:href="@{/details/{id}(id=${content.id})}">
+        <p
+          class="main-content-p"
+          th:text="${#strings.substring(content.mainText, 0, 250)}"
+        ></p>
+      </a>
+    </div> -->
+    <script>
+      const navBtn = document.getElementById("nav-btn");
+      const sidebar = document.getElementById("sidebar");
+      const sidebarClose = document.getElementById("sidebar-close");
+      const overlay = document.getElementById("overlay");
+
+      function openSidebar() {
+        sidebar.classList.add("active");
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove("active");
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      navBtn.addEventListener("click", openSidebar);
+      sidebarClose.addEventListener("click", closeSidebar);
+    </script>
+    <script
+      src="https://kit.fontawesome.com/109a493327.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

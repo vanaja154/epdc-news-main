@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPDC</title>
+    <link rel="stylesheet" href="donation.css" />
+    <link rel="stylesheet" th:href="@{/header.css}" />
+    <link rel="stylesheet" th:href="@{/footer.css}" />
+    <link rel="stylesheet" href="phone.css" />
+    <link rel="stylesheet" href="footer.css" />
+  </head>
+  <style>
+    /* General Styles */
+    .approved-feedback-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .feedback-carousel {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+
+    }
+
+    .feedback-card {
+      flex: 0 0 auto;
+      width: 300px;
+      margin-right: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: slideLeft 20s linear infinite;
+
+    }
+
+    .feedback-card p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    .bold-stars {
+      font-weight: bold;
+      font-size: 18px;
+      color: rgb(212, 185, 32);
+    }
+    .social-icons-footer a {
+      color: black;
+    }
+
+    /* Animation: Right to Left */
+    @keyframes slideLeft {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-section {
+        display: block;
+        justify-items: center;
+        align-items: center;
+      }
+      .content-container {
+        margin-left: 30px;
+        width: 100%;
+        height: 100%;
+      }
+      .donate-progress {
+        margin-left: 127px;
+      }
+      .donation-image {
+        width: 94%;
+        height: 343px;
+      }
+      .notice {
+        width: 96%;
+      }
+      footer {
+        margin-top: 45px;
+      }
+      .sidebar {
+        width: 96%;
+      }
+      .approved-feedback-section {
+        margin-top: 520px;
+      }
+      .feedback-card span p {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .content-container {
+        margin-left: 30px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  </style>
+  <body>
+    <!-- Header -->
+    <div th:replace="~{header :: header}"></div>
+
+    <!-- Main Section -->
+    <div class="main-section">
+      <div class="content-container">
+        <!-- Title -->
+        <h2 th:text="${donation.title} ?: 'Default Title'"></h2>
+
+        <!-- Image -->
+        <img
+          th:if="${donation.image}"
+          th:src="${donation.image}"
+          alt="Donation Image"
+          class="donation-image"
+        />
+        <!-- <img
+          src="images/profile.jpeg"
+          alt="Donation Image"
+          class="donation-image"
+        /> -->
+        <p th:unless="${donation.image}">No image available</p>
+
+        <!-- Description -->
+        <p
+          class="notice"
+          th:text="${donation.text} ?: 'No description available.'"
+        ></p>
+
+        <!-- Raised Amount -->
+        <div class="container">
+          <div class="donate-progress">
+            <span class="icon"><i class="fas fa-hand-holding-heart"></i></span>
+            <span
+              >Raised Amount:
+              <strong th:text="${donation.amount} ?: '₹0'"></strong
+            ></span>
+          </div>
+          <!-- <button id="share">Share</button> -->
+
+          <!-- Hidden Link (Optional) -->
+  <ul style="display: none;">
+    <li>
+      <a id="whatsapp-link" href="https://whatsapp.com"></a>
+    </li>
+  </ul>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <!-- Payment Section -->
+        <div class="payment-section">
+          <h2>Donate Now</h2>
+          <p>Scan the QR Code to Pay:</p>
+          <img src="images/image.png" alt="UPI QR Code" />
+          <p>Or Pay via UPI ID:</p>
+          <h3 style="color: green">8179019623@ybl</h3>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="feedback-form" id="feedback-form">
+          <h3>Feedback Form</h3>
+          <form action="/submit-feedback" method="post" id="feedback-form">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="Your Name"
+            />
+
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Your Email"
+            />
+
+            <label for="experience">How was your experience?</label>
+            <select id="experience" name="experience">
+              <option value="Excellent">★★★★★ (5 Stars)</option>
+              <option value="Best">★★★★☆ (4 Stars)</option>
+              <option value="Good">★★★☆☆ (3 Stars)</option>
+              <option value="Average">★★☆☆☆ (2 Stars)</option>
+              <option value="Poor">★☆☆☆☆ (1 Star)</option>
+            </select>
+
+            <label for="comments">Comments:</label>
+            <textarea
+              id="comments"
+              name="comments"
+              rows="5"
+              placeholder="Your feedback..."
+            ></textarea>
+
+            <button type="submit" class="submit-feedback">
+              Submit Feedback
+            </button>
+          </form>
+          <!-- Success Message -->
+          <div
+            th:if="${feedbackSuccess}"
+            style="
+              margin-top: 10px;
+              padding: 10px;
+              background-color: #dff0d8;
+              color: #3c763d;
+              border-radius: 4px;
+            "
+          >
+            Thank you for your feedback!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approved Feedback Section -->
+    <div class="approved-feedback-section">
+      <!-- <h3>User Feedback</h3> -->
+      <div th:if="${approvedFeedback.isEmpty()}">
+        <p>No feedback available yet.</p>
+      </div>
+      <div class="feedback-carousel">
+        <div th:each="feedback : ${approvedFeedback}" class="feedback-card">
+          <!-- <p><strong>Email:</strong> <span th:text="${feedback.email}"></span></p> -->
+          <p>
+            <strong></strong>
+            <span th:switch="${feedback.experience}">
+              <span class="bold-stars" th:case="'Excellent'">★★★★★</span>
+              <span class="bold-stars" th:case="'Best'">★★★★☆</span>
+              <span class="bold-stars" th:case="'Good'">★★★☆☆</span>
+              <span class="bold-stars" th:case="'Average'">★★☆☆☆</span>
+              <span class="bold-stars" th:case="'Poor'">★☆☆☆☆</span>
+              <span th:case="*">No rating</span>
+              <!-- Default case -->
+            </span>
+          </p>
+          <h2><span th:text="${feedback.name}"></span></h2>
+          <p>
+            <strong>Comments:</strong>
+            <span th:text="${feedback.comments}"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div th:replace="~{footer :: footer}"></div>
+
+    <script>
+          // Select the share button
+    const shareButton = document.getElementById('share');
+
+// Define the WhatsApp link
+const whatsappLink = 'https://whatsapp.com';
+
+// Add a click event listener to the button
+shareButton.addEventListener('click', () => {
+  // Redirect the user to the WhatsApp link
+  window.location.href = whatsappLink;
+});
+    </script>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPDC</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/header.css}">
+    <link rel="stylesheet" th:href="@{/footer.css}" />
+    <link rel="stylesheet" th:href="@{/scrolling.css}" />
+    <script src="/darkmode.js"></script>
+    <style>
+        
+        .text-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 15px;
+            background-color: #9acd32;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-button:hover {
+            background-color: #9acd32;
+        }
+        .ad-banner {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div th:replace="~{header :: header}"></div>
+
+    <div class="text-container">
+        <!-- <h2>Full News</h2> -->
+        <div th:if="${addText != null}">
+            <p th:text="${addText}" style="white-space: pre-wrap;"></p>
+        </div>
+        <div th:if="${addText == null}">
+            <p>No content available.</p>
+        </div>
+        <a href="/" class="back-button">Back To Home</a>
+    </div>
+
+
+    <!-- <div class="featured-news">
+        <h2>Featured News</h2>
+        <div class="news-container" id="newsContainer">
+          <div th:each="section : ${thirdSections}" class="news-card">
+            <a th:href="@{/details/{id}(id=${section.id}, third='item1')}">
+              <img th:src="${section.image1}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title1, 0, 15)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text1, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+  
+          <div th:each="section : ${thirdSections}" class="news-card">
+            <a th:href="@{/details/{id}(id=${section.id}, third='item2')}">
+              <img th:src="${section.image2}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title2, 0, 15)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text2, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+  
+          <div th:each="section : ${thirdSections}" class="news-card">
+            <a th:href="@{/details/{id}(id=${section.id}, third='item3')}">
+              <img th:src="${section.image3}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title3, 0, 15)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text3, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+  
+          <div th:each="section : ${thirdSections}" class="news-card">
+            <a th:href="@{/details/{id}(id=${section.id}, third='item4')}">
+              <img th:src="${section.image4}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title4, 0, 15)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text4, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+  
+          <div th:each="section : ${thirdSections}" class="news-card">
+            <a th:href="@{/details/{id}(id=${section.id}, third='item5')}">
+              <img th:src="${section.image5}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title5, 0, 15)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text5, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+  
+          <div th:each="section : ${thirdSections}" class="news-card">
+            <a th:href="@{/details/{id}(id=${section.id}, third='item6')}">
+              <img th:src="${section.image6}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title6, 0, 15)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text6, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+        </div>
+    </div> -->
+
+    <div></div>
+
+    <div th:replace="~{footer :: footer}"></div>
+</body>
+</html>

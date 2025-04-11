@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Navigation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      header {
+        background-color: blue;
+        color: white;
+        padding: 1rem;
+        height: 3rem; /* Initial height */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .social-icons {
+        margin-left: auto;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icons a {
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      #nav-btn {
+        background: none;
+        outline: none;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        color: white;
+        margin-right: 1rem;
+      }
+
+      #navbar-div ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        flex-wrap: wrap;
+        max-width: 70%;
+        position: relative;
+        top: 2.5rem;
+        margin-left: 70px;
+      }
+
+      #navbar-div ul li {
+        margin-bottom: 1rem;
+      }
+
+      #navbar-div li a {
+        text-decoration: none;
+        display: block;
+        color: white;
+      }
+
+      /* Dropdown styles */
+      .dropbtn {
+        background: none;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        color: white;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black !important;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Sidebar for mobile */
+      #sidebar {
+        position: fixed;
+        width: 0;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: blue;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        transition: all 0.3s ease;
+        z-index: 999;
+        overflow-x: hidden;
+        padding-top: 3rem;
+      }
+
+      #sidebar.active {
+        width: 70%;
+        max-width: 300px;
+      }
+
+      #sidebar-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      #sidebar ul {
+        list-style: none;
+        color: white;
+        padding: 0;
+        margin: 0 0 1.5rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        padding-left: 2rem;
+      }
+
+      #sidebar li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem;
+      }
+
+      /* Overlay for sidebar */
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 998;
+      }
+
+      /* Desktop hover effect */
+      @media (min-width: 769px) {
+        header:hover {
+          height: 300px;
+        }
+
+        .initially-hidden {
+          display: none;
+        }
+
+        header:hover .initially-hidden {
+          display: flex;
+        }
+      }
+
+      /* Mobile styles */
+      @media (max-width: 768px) {
+        .social-icons {
+          display: none;
+        }
+
+        #navbar-div {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="overlay" onclick="closeSidebar()"></div>
+
+    <header>
+      <div class="header-left">
+        <button id="nav-btn" aria-label="Open navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div id="navbar-div">
+          <ul>
+            <li>
+              <a href="/">హోం</a>
+            </li>
+            <li>
+              <div class="dropdown">
+                <button class="dropbtn">రాష్ట్రాలు</button>
+                <div class="dropdown-content">
+                  <a href="#">తెలంగాణ</a>
+                  <a href="#">ఆంధ్ర ప్రదేశ్</a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="">సినిమాలూ</a>
+            </li>
+            <li>
+              <a href="">పర్యావరణం</a>
+            </li>
+            <li>
+              <a href="">క్రీడలు</a>
+            </li>
+            <li>
+              <a href="">వ్యాపారం</a>
+            </li>
+            <li class="initially-hidden">
+              <a href="">కుటుంబం</a>
+            </li>
+            <li class="initially-hidden">
+              <a href="">ఫోటోలు</a>
+            </li>
+            <li class="initially-hidden">
+              <a href="">వీడియోలు</a>
+            </li>
+            <li class="initially-hidden">
+              <div class="dropdown">
+                <button class="dropbtn">ఇంకా</button>
+                <div class="dropdown-content">
+                  <a href="#">దినఫలాలు</a>
+                </div>
+              </div>
+            </li>
+            <li class="initially-hidden">
+              <a href="">ఆరోగ్యం</a>
+            </li>
+            <li class="initially-hidden">
+              <a href="">ఇ పేపర్</a>
+            </li>
+            <li class="initially-hidden">
+              <a href="">ఎడ్యుకేషన్</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </header>
+
+    <div id="sidebar">
+      <button id="sidebar-close" aria-label="Close navigation menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <ul>
+        <li><a href="/">హోం</a></li>
+        <li><a href="#">తెలంగాణ</a></li>
+        <li><a href="#">ఆంధ్ర ప్రదేశ్</a></li>
+        <li><a href="">సినిమాలూ</a></li>
+      </ul>
+
+      <ul>
+        <li><a href="">పర్యావరణం</a></li>
+        <li><a href="">క్రీడలు</a></li>
+        <li><a href="">వ్యాపారం</a></li>
+        <li><a href="">కుటుంబం</a></li>
+      </ul>
+
+      <ul>
+        <li><a href="">ఫోటోలు</a></li>
+        <li><a href="">వీడియోలు</a></li>
+        <li><a href="#">దినఫలాలు</a></li>
+        <li><a href="">ఆరోగ్యం</a></li>
+        <li><a href="">ఇ పేపర్</a></li>
+        <li><a href="">ఎడ్యుకేషన్</a></li>
+      </ul>
+
+      <ul class="sidebar-social">
+        <li>
+          <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const navBtn = document.getElementById("nav-btn");
+      const sidebar = document.getElementById("sidebar");
+      const sidebarClose = document.getElementById("sidebar-close");
+      const overlay = document.getElementById("overlay");
+
+      function openSidebar() {
+        sidebar.classList.add("active");
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove("active");
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      navBtn.addEventListener("click", openSidebar);
+      sidebarClose.addEventListener("click", closeSidebar);
+    </script>
+    <script
+      src="https://kit.fontawesome.com/109a493327.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

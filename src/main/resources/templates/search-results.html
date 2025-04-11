@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h2>Search Results</h2>
+    
+    <div th:if="${searchResult != null and !searchResult.startsWith('No results')}">
+        <a th:href="${searchResult}" target="_blank">Click here for more details</a>
+    </div>
+
+    <div th:if="${searchResult != null and searchResult.startsWith('No results')}">
+        <p th:text="${searchResult}"></p>
+    </div>
+</body>
+</html>

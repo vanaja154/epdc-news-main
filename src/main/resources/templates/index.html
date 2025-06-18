@@ -3,7 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EPDC</title>
+    <title>EPCD News | Breaking News, Smart News for Smart Readers</title>
+    <meta
+      name="description"
+      content="EPCD News brings you fast, accurate news coverage on global and local events. Get the latest updates, smart insights, and trending stories for informed readers."
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="images/globe-removebg-preview.png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H8R8GZQGKK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H8R8GZQGKK");
+    </script>
+
     <script
       src="https://kit.fontawesome.com/109a493327.js"
       crossorigin="anonymous"
@@ -14,66 +39,71 @@
     <!-- <link rel="stylesheet" href="darkmode.css" /> -->
     <link rel="stylesheet" href="phone.css" />
     <style>
-
-        /* General Styles */
-    .approved-feedback-section {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .feedback-carousel {
-      display: flex;
-      overflow: hidden;
-      width: 100%;
-      margin-bottom: 30px;
-      height: 156px;
-    }
-
-    .feedback-card {
-      flex: 0 0 auto;
-      width: 300px;
-      margin-right: 20px;
-      padding: 15px;
-      /* background-color: #f9f9f9; */
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: slideLeft 20s linear infinite;
-    }
-
-    .feedback-card p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #333;
-    }
-    .bold-stars {
-      font-weight: bold;
-      font-size: 18px;
-      color: rgb(212, 185, 32);
-    }
-    .social-icons-footer a {
-      color: black;
-    }
-
-    /* Animation: Right to Left */
-    @keyframes slideLeft {
-      0% {
-        transform: translateX(100%);
+      /* General Styles */
+      .approved-feedback-section {
+        margin-top: 20px;
+        text-align: center;
       }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
 
-      
-    @media (max-width: 450px) {
-      #left-section{
-        margin-top: -220px;
-      }
-      .testimonial-row{
+      .feedback-carousel {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
         margin-bottom: 30px;
+        height: 373px;
+        position: relative;
+        top: 97px;
       }
-    }
+
+      .feedback-card {
+        flex: 0 0 auto;
+        width: 300px;
+        margin-right: 20px;
+        padding: 15px;
+        /* background-color: #f9f9f9; */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: slideLeft 20s linear infinite;
+      }
+
+      .feedback-card p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #333;
+      }
+      .bold-stars {
+        font-weight: bold;
+        font-size: 18px;
+        color: rgb(212, 185, 32);
+      }
+      .social-icons-footer a {
+        color: black;
+      }
+
+      /* Animation: Right to Left */
+      @keyframes slideLeft {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      @media (max-width: 450px) {
+        #left-section {
+          margin-top: -220px;
+        }
+        .testimonial-row {
+          margin-bottom: 30px;
+        }
+        .video1{
+          width: 340px;
+          height: 200px;
+
+        }
+      }
     </style>
   </head>
   <body>
@@ -87,7 +117,7 @@
             <img
               class="main-image"
               th:src="${content.mainImage}"
-              alt="Main image"
+              alt="EPDC Breaking news"
             />
           </a>
 
@@ -107,7 +137,10 @@
             class="sidebar-link"
           >
             <div class="sidebar-item">
-              <img th:src="${content.sidebar1Image}" alt="Sidebar image" />
+              <img
+                th:src="${content.sidebar1Image}"
+                alt="dakshinaadi Breaking news,Sidebar image"
+              />
               <div class="side-text">
                 <h3
                   th:text="${#strings.substring(content.sidebar1Title, 0, 20)}"
@@ -124,7 +157,10 @@
             class="sidebar-link"
           >
             <div class="sidebar-item">
-              <img th:src="${content.sidebar2Image}" alt="Sidebar image" />
+              <img
+                th:src="${content.sidebar2Image}"
+                alt="EPCD News – Telangana Breaking News with Real-Time Updates,Sidebar image"
+              />
               <div class="side-text">
                 <h3
                   th:text="${#strings.substring(content.sidebar2Title, 0, 20)}"
@@ -141,7 +177,10 @@
             class="sidebar-link"
           >
             <div class="sidebar-item">
-              <img th:src="${content.sidebar3Image}" alt="Sidebar image" />
+              <img
+                th:src="${content.sidebar3Image}"
+                alt="EPCD News – Real-Time Updates on Telangana Breaking News and AP Headlines,Sidebar image"
+              />
               <div class="side-text">
                 <h3
                   th:text="${#strings.substring(content.sidebar3Title, 0, 20)}"
@@ -162,10 +201,12 @@
           <h2>Latest News</h2>
 
           <a th:href="@{/details/{id}(id=${section.id}, second='left1')}">
-            
             <div class="news-item">
               <div class="news-item-image1">
-                <img th:src="${section.leftImage1}" alt="News Image" />
+                <img
+                  th:src="${section.leftImage1}"
+                  alt="Latest News from EPCD News,News Image"
+                />
               </div>
               <div
                 class="info"
@@ -177,7 +218,10 @@
           <a th:href="@{/details/{id}(id=${section.id}, second='left2')}">
             <div class="news-item">
               <div class="news-item-image1">
-                <img th:src="${section.leftImage2}" alt="News Image" />
+                <img
+                  th:src="${section.leftImage2}"
+                  alt="Breaking News in Andhra Pradesh – AP News Coverage on EPCD News,News Image"
+                />
               </div>
               <div
                 class="info"
@@ -189,7 +233,10 @@
           <a th:href="@{/details/{id}(id=${section.id}, second='left3')}">
             <div class="news-item">
               <div class="news-item-image1">
-                <img th:src="${section.leftImage3}" alt="News Image" />
+                <img
+                  th:src="${section.leftImage3}"
+                  alt="EPCD News – Real-Time Updates on Telangana Breaking News and AP Headlines,News Image"
+                />
               </div>
               <div
                 class="info"
@@ -201,7 +248,7 @@
       </div>
 
       <div class="center-section">
-        <div class="live-tv section">
+        <!-- <div class="live-tv section">
           <h2>Trending Video</h2>
 
           <a th:href="@{/details/{id}(id=${section.id}, second='video1')}">
@@ -209,16 +256,52 @@
               <source th:src="${section.video1}" type="video/mp4" />
             </video>
           </a>
+        </div> -->
+        <div class="live-tv section">
+          <h2>Trending Video</h2>
+          <iframe
+           class="video1"
+            width="460"
+            height="215"
+            th:src="'https://www.youtube.com/embed/' + ${#strings.substringAfter(section.video1, 'v=')}"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          >
+          </iframe>
+
+          <!-- <iframe width="460" height="215" th:src="${section.video1}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+          <!-- <a th:href="@{/details/{id}(id=${section.id}, second='video1')}"> -->
+          <!-- <span th:text="${section.video1}"></span> -->
+          <!-- </a> -->
         </div>
+
+        <!-- <iframe src="https://www.youtube.com/embed/4d_h6IPa-SA" frameborder="0"></iframe> -->
 
         <div class="section">
           <h2>Trending Video</h2>
 
           <div class="trending-item">
-            <video controls>
+            <!-- <video controls>
               <source th:src="${section.video2}" type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
+            </video> -->
+            <!-- <iframe width="260" height="100" th:src="${section.video2}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+            <iframe
+            
+              width="260"
+              height="100"
+              th:src="'https://www.youtube.com/embed/' + ${#strings.substringAfter(section.video2, 'v=')}"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            >
+            </iframe>
+
             <a th:href="@{/details/{id}(id=${section.id}, second='video2')}">
               <div
                 class="info"
@@ -228,10 +311,23 @@
           </div>
 
           <div class="trending-item">
-            <video controls>
+            <!-- <video controls>
               <source th:src="${section.video3}" type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
+            </video> -->
+            <iframe
+              width="260"
+              height="100"
+              th:src="'https://www.youtube.com/embed/' + ${#strings.substringAfter(section.video3, 'v=')}"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            >
+            </iframe>
+
+            <!-- <iframe width="260" height="100" th:src="${section.video3}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
             <a th:href="@{/details/{id}(id=${section.id}, second='video3')}">
               <div
                 class="info"
@@ -251,13 +347,24 @@
       </div> -->
 
       <!-- Advertisement Section -->
-      <div class="right-section" th:if="${epaper != null}">
-        <div class="section ad-section">
-            <a th:href="${epaper.advertisementLink}" target="_blank">
-                <img th:src="${epaper.advertisementImage}" alt="Advertisement" />
-            </a>
+      <div class="right-section" th:each="section : ${moviesNews}">
+        <div class="section ad-section" style="position: relative">
+          <div>
+            <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+          </div>
+          <!-- <a th:href="@{/detail/{id}(id=${section.id},category=Movies, section='right1')}" class="sidebar-link"> -->
+          <a
+            th:href="${section.rightImage1Link}"
+            target="_blank"
+            class="sidebar-link"
+          >
+            <img
+              th:src="${section.rightImage1}"
+              alt="Breaking News in Telangana and AP – Latest News from EPCD News,right image"
+            />
+          </a>
         </div>
-    </div>
+      </div>
     </div>
 
     <div class="featured-news">
@@ -265,7 +372,10 @@
       <div class="news-container" id="newsContainer">
         <div th:each="section : ${thirdSections}" class="news-card">
           <a th:href="@{/details/{id}(id=${section.id}, third='item1')}">
-            <img th:src="${section.image1}" alt="News Image" />
+            <img
+              th:src="${section.image1}"
+              alt="Latest Technology News – Innovations and Trends in Tech | EPCD News,News Image"
+            />
             <div class="info">
               <div class="tag-date">
                 <span
@@ -282,7 +392,10 @@
 
         <div th:each="section : ${thirdSections}" class="news-card">
           <a th:href="@{/details/{id}(id=${section.id}, third='item2')}">
-            <img th:src="${section.image2}" alt="News Image" />
+            <img
+              th:src="${section.image2}"
+              alt="Technology News – Get the Latest Updates on Gadgets and IT | EPCD News,News Image"
+            />
             <div class="info">
               <div class="tag-date">
                 <span
@@ -299,7 +412,10 @@
 
         <div th:each="section : ${thirdSections}" class="news-card">
           <a th:href="@{/details/{id}(id=${section.id}, third='item3')}">
-            <img th:src="${section.image3}" alt="News Image" />
+            <img
+              th:src="${section.image3}"
+              alt="Tech News – Breaking Updates on the Latest Tech Advancements | EPCD News,News Image"
+            />
             <div class="info">
               <div class="tag-date">
                 <span
@@ -316,7 +432,10 @@
 
         <div th:each="section : ${thirdSections}" class="news-card">
           <a th:href="@{/details/{id}(id=${section.id}, third='item4')}">
-            <img th:src="${section.image4}" alt="News Image" />
+            <img
+              th:src="${section.image4}"
+              alt="IT News – Stay Informed on the Latest IT Trends and Updates | EPCD News,News Image"
+            />
             <div class="info">
               <div class="tag-date">
                 <span
@@ -333,7 +452,10 @@
 
         <div th:each="section : ${thirdSections}" class="news-card">
           <a th:href="@{/details/{id}(id=${section.id}, third='item5')}">
-            <img th:src="${section.image5}" alt="News Image" />
+            <img
+              th:src="${section.image5}"
+              alt="Latest Technology News – Discover Emerging Tech and Innovations | EPCD News,News Image"
+            />
             <div class="info">
               <div class="tag-date">
                 <span
@@ -350,7 +472,10 @@
 
         <div th:each="section : ${thirdSections}" class="news-card">
           <a th:href="@{/details/{id}(id=${section.id}, third='item6')}">
-            <img th:src="${section.image6}" alt="News Image" />
+            <img
+              th:src="${section.image6}"
+              alt="Tech News – Real-Time Coverage of Technology, Gadgets, and IT News,News Image"
+            />
             <div class="info">
               <div class="tag-date">
                 <span
@@ -366,103 +491,123 @@
         </div>
       </div>
     </div>
-    <hr style="border: 1px solid #9acd32" />
 
-    <h1 class="gallery-heading" id="gallery">Latest Gallery Pics</h1>
-    <div class="gallery">
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item1')}">
-          <img th:src="${section.image1}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item2')}">
-          <img th:src="${section.image2}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item3')}">
-          <img th:src="${section.image3}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item4')}">
-          <img th:src="${section.image4}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item5')}">
-          <img th:src="${section.image5}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item6')}">
-          <img th:src="${section.image6}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item7')}">
-          <img th:src="${section.image7}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item8')}">
-          <img th:src="${section.image8}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item9')}">
-          <img th:src="${section.image9}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item10')}">
-          <img th:src="${section.image10}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item11')}">
-          <img th:src="${section.image11}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item12')}">
-          <img th:src="${section.image12}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item13')}">
-          <img th:src="${section.image13}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item14')}">
-          <img th:src="${section.image14}" alt="Gallery Item 1" />
-        </a>
-      </div>
-      <div th:each="section : ${fourthSections}" class="gallery-item">
-        <a th:href="@{/details/{id}(id=${section.id}, fourth='item15')}">
-          <img th:src="${section.image15}" alt="Gallery Item 1" />
-        </a>
+    <div class="gallery-container">
+      <hr style="border: 1px solid #9acd32" />
+
+      <h1 class="gallery-heading" id="gallery">Latest Gallery Pics</h1>
+      <div class="gallery">
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item1')}">
+            <img
+              th:src="${section.image1}"
+              alt="Technology News – All the Latest Breakthroughs in IT and Innovations | EPCD News,Gallery Item 1"
+            />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item2')}">
+            <img
+              th:src="${section.image2}"
+              alt="IT News – Latest Developments in Information Technology | EPCD News,Gallery Item 2"
+            />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item3')}">
+            <img
+              th:src="${section.image3}"
+              alt="Technology News – Stay Ahead with the Latest Tech Updates and Insights,Gallery Item 3"
+            />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item4')}">
+            <img
+              th:src="${section.image4}"
+              alt="Latest Tech News – Covering the Most Important Updates in Technology | EPCD News,Gallery Item 4"
+            />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item5')}">
+            <img th:src="${section.image5}" alt="Gallery Item 5" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item6')}">
+            <img th:src="${section.image6}" alt="Gallery Item 6" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item7')}">
+            <img th:src="${section.image7}" alt="Gallery Item 7" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item8')}">
+            <img th:src="${section.image8}" alt="Gallery Item 8" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item9')}">
+            <img th:src="${section.image9}" alt="Gallery Item 9" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item10')}">
+            <img th:src="${section.image10}" alt="Gallery Item 1" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item11')}">
+            <img th:src="${section.image11}" alt="Gallery Item 1" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item12')}">
+            <img th:src="${section.image12}" alt="Gallery Item 1" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item13')}">
+            <img th:src="${section.image13}" alt="Gallery Item 1" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item14')}">
+            <img th:src="${section.image14}" alt="Gallery Item 1" />
+          </a>
+        </div>
+        <div th:each="section : ${fourthSections}" class="gallery-item">
+          <a th:href="@{/details/{id}(id=${section.id}, fourth='item15')}">
+            <img th:src="${section.image15}" alt="Gallery Item 1" />
+          </a>
+        </div>
       </div>
     </div>
-    
 
     <div th:each="section : ${AndhraNews}" class="container2">
       <!-- Left Section -->
       <div class="left-section">
-        
         <div class="section">
           <div class="section-header">
             <h2 th:text="AndhraNews + ' News'"></h2>
-            <a th:href="@{'/category?category=Andhrapradesh'}" class="section-link">View More</a>
-        </div>
-         <!-- Sidebar 1 -->
+            <a
+              th:href="@{'/category?category=Andhrapradesh'}"
+              class="section-link"
+              >View More</a
+            >
+          </div>
+          <!-- Sidebar 1 -->
           <div class="news-item">
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Andhrapradesh, section='sidebar1')}"
             >
-              <img th:src="${section.sidebar1Image}" alt="Sidebar 1 Image" />
+              <img
+                th:src="${section.sidebar1Image}"
+                alt="AP Breaking News – Latest Updates on Andhra Pradesh Events | EPCD News,Sidebar 1 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar1Title, 0, 25)} + '...'"
@@ -479,7 +624,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Andhrapradesh, section='sidebar2')}"
             >
-              <img th:src="${section.sidebar2Image}" alt="Sidebar 2 Image" />
+              <img
+                th:src="${section.sidebar2Image}"
+                alt="AP Breaking News – Latest Stories and Updates from Andhra Pradesh,Sidebar 2 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar2Title, 0, 25)} + '...'"
@@ -496,7 +644,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Andhrapradesh, section='sidebar3')}"
             >
-              <img th:src="${section.sidebar3Image}" alt="Sidebar 3 Image" />
+              <img
+                th:src="${section.sidebar3Image}"
+                alt="EPCD News – Latest AP Breaking News and Telangana Updates,Sidebar 3 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar3Title, 0, 25)} + '...'"
@@ -513,7 +664,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Andhrapradesh, section='sidebar4')}"
             >
-              <img th:src="${section.sidebar4Image}" alt="Sidebar 2 Image" />
+              <img
+                th:src="${section.sidebar4Image}"
+                alt="Andhra Pradesh Breaking News – Real-Time Alerts from EPCD News,Sidebar 4 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar4Title, 0, 25)} + '...'"
@@ -530,7 +684,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Andhrapradesh, section='sidebar5')}"
             >
-              <img th:src="${section.sidebar5Image}" alt="Sidebar 5 Image" />
+              <img
+                th:src="${section.sidebar5Image}"
+                alt="AP Breaking News – Exclusive Coverage of Andhra Pradesh Events,Sidebar 5 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar5Title, 0, 25)} + '...'"
@@ -544,41 +701,63 @@
         </div>
       </div>
 
-
       <!-- Right Section -->
-      <div class="rightadd">
+      <div class="rightadd" style="position: relative">
         <div class="right-section" id="addsection">
-          <div class="section ad-section">
-            <a th:href="@{/detail/{id}(id=${section.id},category=Andhrapradesh, section='right1')}" class="sidebar-link">
-              <img th:src="${section.rightImage1}" alt="right image" />
+          <!-- <div style="position: absolute;top: 8px;left: 10px;">
+            <p>Ad</p>
+          </div> -->
+          <div class="section ad-section" style="position: relative">
+            <div>
+              <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+            </div>
+            <!-- First Right Image -->
+            <a
+              th:href="${section.rightImage1Link}"
+              target="_blank"
+              class="sidebar-link"
+            >
+              <img th:src="${section.rightImage1}" alt="Right Image 1" />
             </a>
           </div>
         </div>
         <div class="right-section" id="addsection">
-          <div class="section ad-section">
-            <a th:href="@{/detail/{id}(id=${section.id},category=Andhrapradesh, section='right2')}" class="sidebar-link">
-              <img th:src="${section.rightImage2}" alt="right image" />
+          <div class="section ad-section" style="position: relative">
+            <div>
+              <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+            </div>
+            <!-- Second Right Image -->
+            <a th:href="${section.rightImage2Link}" class="sidebar-link">
+              <img th:src="${section.rightImage2}" alt="Right Image 2" />
             </a>
           </div>
         </div>
       </div>
     </div>
 
-    <div th:each="section : ${TelanganaNews}" class="container2" id="left-section">
+    <div
+      th:each="section : ${TelanganaNews}"
+      class="container2"
+      id="left-section"
+    >
       <!-- Left Section -->
       <div class="left-section">
-        
         <div class="section">
           <div class="section-header">
             <h2 th:text="Telangana + ' News'"></h2>
-            <a th:href="@{'/category?category=Telangana'}" class="section-link">View More</a>
-        </div>
-         <!-- Sidebar 1 -->
+            <a th:href="@{'/category?category=Telangana'}" class="section-link"
+              >View More</a
+            >
+          </div>
+          <!-- Sidebar 1 -->
           <div class="news-item">
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Telangana, section='sidebar1')}"
             >
-              <img th:src="${section.sidebar1Image}" alt="Sidebar 1 Image" />
+              <img
+                th:src="${section.sidebar1Image}"
+                alt="Telangana Breaking News,Sidebar 1 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar1Title, 0, 25)} + '...'"
@@ -595,7 +774,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Telangana, section='sidebar2')}"
             >
-              <img th:src="${section.sidebar2Image}" alt="Sidebar 2 Image" />
+              <img
+                th:src="${section.sidebar2Image}"
+                alt="TG Breaking News – Latest Headlines from Telangana | EPCD News,Sidebar 2 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar2Title, 0, 25)} + '...'"
@@ -612,7 +794,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Telangana, section='sidebar3')}"
             >
-              <img th:src="${section.sidebar3Image}" alt="Sidebar 3 Image" />
+              <img
+                th:src="${section.sidebar3Image}"
+                alt="Telangana Breaking News – Stay Informed with EPCD News Coverage,Sidebar 3 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar3Title, 0, 25)} + '...'"
@@ -629,7 +814,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Telangana, section='sidebar4')}"
             >
-              <img th:src="${section.sidebar4Image}" alt="Sidebar 4 Image" />
+              <img
+                th:src="${section.sidebar4Image}"
+                alt="Telangana Breaking News – Top Stories and Alerts on EPCD News,Sidebar 4 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar4Title, 0, 25)} + '...'"
@@ -646,7 +834,10 @@
             <a
               th:href="@{/detail/{id}(id=${section.id}, category=Telangana, section='sidebar5')}"
             >
-              <img th:src="${section.sidebar5Image}" alt="Sidebar 5 Image" />
+              <img
+                th:src="${section.sidebar5Image}"
+                alt="TG Breaking News – Coverage of Telangana's Top Stories | EPCD News,Sidebar 5 Image"
+              />
               <div class="matter">
                 <h3
                   th:text="${#strings.substring(section.sidebar5Title, 0, 25)} + '...'"
@@ -660,28 +851,41 @@
         </div>
       </div>
 
-
       <!-- Right Section -->
-      <div class="rightadd">
+      <div class="rightadd" style="position: relative">
         <div class="right-section" id="addsection">
-          <div class="section ad-section">
-            <a th:href="@{/detail/{id}(id=${section.id},category=Telangana, section='right1')}" class="sidebar-link">
-              <img th:src="${section.rightImage1}" alt="right image" />
+          <!-- <div style="position: absolute;top: 8px;left: 10px;">
+            <p>Ad</p>
+          </div> -->
+          <div class="section ad-section" style="position: relative">
+            <div>
+              <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+            </div>
+            <!-- First Right Image -->
+            <a
+              th:href="${section.rightImage1Link}"
+              target="_blank"
+              class="sidebar-link"
+            >
+              <img th:src="${section.rightImage1}" alt="Right Image 1" />
             </a>
           </div>
         </div>
         <div class="right-section" id="addsection">
-          <div class="section ad-section">
-            <a th:href="@{/detail/{id}(id=${section.id},category=Telangana, section='right2')}" class="sidebar-link">
-              <img th:src="${section.rightImage2}" alt="right image" />
+          <div class="section ad-section" style="position: relative">
+            <div>
+              <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+            </div>
+            <!-- Second Right Image -->
+            <a th:href="${section.rightImage2Link}" class="sidebar-link">
+              <img th:src="${section.rightImage2}" alt="Right Image 2" />
             </a>
           </div>
         </div>
       </div>
     </div>
 
-
-    <div class="approved-feedback-section"  id="left-section">
+    <div class="approved-feedback-section" id="left-section">
       <!-- <div class="testimonial-container">
         <img src="images/profile.jpeg" alt="Profile" class="profile-img" />
         <div class="highlight-box">
@@ -723,14 +927,13 @@
         <div class="stars">★★★★★</div>
       </div> -->
 
-       <!-- Approved Feedback Section -->
-     
+      <!-- Approved Feedback Section -->
+
       <div th:if="${approvedFeedback.isEmpty()}">
         <p>No feedback available yet.</p>
       </div>
       <div class="feedback-carousel">
         <div th:each="feedback : ${approvedFeedback}" class="feedback-card">
-    
           <p>
             <strong></strong>
             <span th:switch="${feedback.experience}">
@@ -740,7 +943,6 @@
               <span class="bold-stars" th:case="'Average'">★★☆☆☆</span>
               <span class="bold-stars" th:case="'Poor'">★☆☆☆☆</span>
               <span th:case="*">No rating</span>
-              
             </span>
           </p>
           <h2><span th:text="${feedback.name}"></span></h2>
@@ -751,12 +953,11 @@
         </div>
       </div>
     </div>
-    
 
     <div></div>
 
     <div th:replace="~{footer :: footer}"></div>
 
-    <script src="darkmode.js"></script> 
+    <script src="darkmode.js"></script>
   </body>
 </html>

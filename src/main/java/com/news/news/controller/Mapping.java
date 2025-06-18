@@ -70,7 +70,7 @@ public class Mapping {
         List<FourthSection> fourthSections = fourthSectionService.getAllContent();
         List<News> andhraNews = newsService.getNewsByCategory("Andhrapradesh");
         List<News> telanganaNews = newsService.getNewsByCategory("Telangana");
-        List<News> moviesNews = newsService.getNewsByCategory("movies");
+        List<News> moviesNews = newsService.getNewsByCategory("Movies");
         List<News> sportsNews = newsService.getNewsByCategory("sports");
 
         // Construct full URLs for images and videos
@@ -85,9 +85,14 @@ public class Mapping {
             section.setLeftImage1(constructImageUrl(section.getLeftImage1()));
             section.setLeftImage2(constructImageUrl(section.getLeftImage2()));
             section.setLeftImage3(constructImageUrl(section.getLeftImage3()));
-            section.setVideo1(constructImageUrl(section.getVideo1()));
-            section.setVideo2(constructImageUrl(section.getVideo2()));
-            section.setVideo3(constructImageUrl(section.getVideo3()));
+            section.setVideo1(section.getVideo1());
+            System.out.println("---------------------------------");
+            System.out.println(section.getVideo1());
+            System.out.println("---------------------------------");
+            section.setVideo2(section.getVideo2());
+            System.out.println(section.getVideo2());
+            section.setVideo3(section.getVideo3());
+            System.out.println(section.getVideo3());
         }
 
         for (ThirdSection section : thirdSections) {
@@ -132,115 +137,123 @@ public class Mapping {
         model.addAttribute("moviesNews", moviesNews);
         model.addAttribute("sportsNews", sportsNews);
 
-        
-            // Fetch the latest Epaper data
-            Epaper epaper = epaperService.getLatestContent();
-            // List<HomePageContent> contentList = contentService.getAllContent();
-           
-    
-            // Construct full URLs for images and PDFs 
-            if (epaper != null) {
-                String imageBaseUrl = "https://admin.epdcindia.com/uploads/";
-                String pdfBaseUrl = "https://admin.epdcindia.com/uploads/";
-    
-                epaper.setEdition1Image(constructFileUrl(epaper.getEdition1Image(), imageBaseUrl));
-                epaper.setEdition1PdfFile(constructFileUrl(epaper.getEdition1PdfFile(), pdfBaseUrl));
-                epaper.setEdition2Image(constructFileUrl(epaper.getEdition2Image(), imageBaseUrl));
-                epaper.setEdition2PdfFile(constructFileUrl(epaper.getEdition2PdfFile(), pdfBaseUrl));
-                epaper.setAdvertisementImage(constructFileUrl(epaper.getAdvertisementImage(), imageBaseUrl));
-            }
-    
-            // Add the Epaper object to the model
-            model.addAttribute("epaper", epaper);
-            model.addAttribute("contentList", contentList);
+        // Fetch the latest Epaper data
+        Epaper epaper = epaperService.getLatestContent();
+        // List<HomePageContent> contentList = contentService.getAllContent();
 
-             // Fetch only approved feedback from the database
-     List<UserFeedBack> approvedFeedback = userfeedbackService.getApprovedFeedback();
-    
-     // Pass the approved feedback list to the model
-     model.addAttribute("approvedFeedback", approvedFeedback);
-     
-        
+        // Construct full URLs for images and PDFs
+        if (epaper != null) {
+            String imageBaseUrl = "https://admin.epdcindia.com/uploads/";
+            String pdfBaseUrl = "https://admin.epdcindia.com/uploads/";
+
+            epaper.setEdition1Image(constructFileUrl(epaper.getEdition1Image(), imageBaseUrl));
+            epaper.setEdition1PdfFile(constructFileUrl(epaper.getEdition1PdfFile(), pdfBaseUrl));
+            epaper.setEdition2Image(constructFileUrl(epaper.getEdition2Image(), imageBaseUrl));
+            epaper.setEdition2PdfFile(constructFileUrl(epaper.getEdition2PdfFile(), pdfBaseUrl));
+            epaper.setAdvertisementImage(constructFileUrl(epaper.getAdvertisementImage(), imageBaseUrl));
+        }
+
+        // Add the Epaper object to the model
+        model.addAttribute("epaper", epaper);
+        model.addAttribute("contentList", contentList);
+
+        // Fetch only approved feedback from the database
+        List<UserFeedBack> approvedFeedback = userfeedbackService.getApprovedFeedback();
+
+        // Pass the approved feedback list to the model
+        model.addAttribute("approvedFeedback", approvedFeedback);
 
         return "index";
     }
 
     @GetMapping("/category")
     public String showCategoryPage(
-        @RequestParam String category, // Dynamic category parameter
-        Model model) {
+            @RequestParam String category, // Dynamic category parameter
+            Model model) {
 
-    // Handle null or empty category
-    if (category == null || category.trim().isEmpty()) {
-        throw new IllegalArgumentException("Category parameter is required.");
+        // Handle null or empty category
+        if (category == null || category.trim().isEmpty()) {
+            throw new IllegalArgumentException("Category parameter is required.");
+        }
+
+        // Fetch all content and news for the specified category
+        List<HomePageContent> contentList = contentService.getAllContent();
+        List<News> newsList = newsService.getNewsByCategory(category);
+
+        // Handle no news found
+        if (newsList.isEmpty()) {
+            throw new RuntimeException("No news found for category: " + category);
+        }
+
+        // Construct full URLs for images
+        newsList.forEach(this::constructImageUrls);
+
+        // Add data to the model
+        model.addAttribute("contentList", contentList);
+        model.addAttribute("newsList", newsList);
+        model.addAttribute("category", category);
+
+        // Dynamically return the appropriate HTML page based on the category
+        switch (category) {
+            case "Andhrapradesh":
+                return "andhrapradesh";
+            case "Telangana":
+                return "telangana";
+            case "Environment":
+                return "environment";
+            case "Movies":
+                return "movies";
+            case "Sports":
+                return "sports";
+            case "Business":
+                return "business";
+            case "Family":
+                return "family";
+            case "Prediction":
+                return "prediction";
+            case "Health":
+                return "health";
+            case "Education":
+                return "education";
+            case "Blog":
+                return "blog";
+            default:
+                throw new IllegalArgumentException("Invalid category: " + category);
+        }
     }
-
-    // Fetch all content and news for the specified category
-    List<HomePageContent> contentList = contentService.getAllContent();
-    List<News> newsList = newsService.getNewsByCategory(category);
-
-    // Handle no news found
-    if (newsList.isEmpty()) {
-        throw new RuntimeException("No news found for category: " + category);
-    }
-
-    // Construct full URLs for images
-    newsList.forEach(this::constructImageUrls);
-
-    // Add data to the model
-    model.addAttribute("contentList", contentList);
-    model.addAttribute("newsList", newsList);
-    model.addAttribute("category", category);
-
-    // Dynamically return the appropriate HTML page based on the category
-    switch (category) {
-        case "Andhrapradesh":
-            return "andhrapradesh";
-        case "Telangana":
-            return "telangana";
-        case "Environment":
-            return "environment";
-        case "Movies":
-            return "movies";
-        case "Sports":
-            return "sports";
-        case "Business":
-            return "business";
-        case "Family":
-            return "family";
-        case "Prediction":
-            return "prediction";
-        case "Health":
-            return "health";
-        case "Education":
-            return "education";
-        default:
-            throw new IllegalArgumentException("Invalid category: " + category);
-    }
-}
-    
 
     @GetMapping("/detailsadd/{id}")
-    public String addPage(@PathVariable String id,@RequestParam(required = false) String addtext,Model model)
-    {
+    public String addPage(@PathVariable String id,
+            @RequestParam(required = false) String addtext,
+            Model model) {
+        // Fetch the content by ID
+        HomePageContent content = contentService.getContentById(id);
 
-        HomePageContent content1 = contentService.getContentById(id);
-        if (addtext != null && addtext.equals("true")) {
-        model.addAttribute("addText", content1.getAddText()); 
+        // Construct the full URL for adImage
+        String baseUrl = "https://admin.epdcindia.com/uploads/";
+        String adImage = content.getAdImage();
+        if (adImage != null && !adImage.startsWith("http")) {
+            adImage = baseUrl + adImage; // Prepend the base URL if necessary
         }
+
+        // Add the required fields to the model
+        if (addtext != null && addtext.equals("true")) {
+            model.addAttribute("addText", content.getAddText());
+            model.addAttribute("adLink", content.getAdLink());
+            model.addAttribute("adImage", adImage); // Use the constructed URL
+        }
+
+        // Return the Thymeleaf template name
         return "addtext-detail";
-
-    
     }
-
 
     @GetMapping("/details/{id}")
     public String showDetailPage(@PathVariable String id,
-                                 @RequestParam(required = false) String sidebar,
-                                 @RequestParam(required = false) String second,
-                                 @RequestParam(required = false) String third,
-                                 @RequestParam(required = false) String fourth,
-                                 Model model) {
+            @RequestParam(required = false) String sidebar,
+            @RequestParam(required = false) String second,
+            @RequestParam(required = false) String third,
+            @RequestParam(required = false) String fourth,
+            Model model) {
         List<HomePageContent> contentList = contentService.getAllContent();
 
         List<ThirdSection> thirdSections = thirdSectionService.getAllContent();
@@ -253,7 +266,6 @@ public class Mapping {
             section.setImage6(constructImageUrl(section.getImage6()));
         }
         model.addAttribute("thirdSections", thirdSections);
-
 
         // Default values
         String image = "";
@@ -324,17 +336,17 @@ public class Mapping {
                     text = section.getLeftText3();
                     break;
                 case "video1":
-                    image = constructImageUrl(section.getVideo1());
+                    image = section.getVideo1();
                     isVideo = true; // Set isVideo to true for videos
                     break;
                 case "video2":
-                    image = constructImageUrl(section.getVideo2());
+                    image = section.getVideo2();
                     title = "Trending Video";
                     text = section.getVideoText2();
                     isVideo = true; // Set isVideo to true for videos
                     break;
                 case "video3":
-                    image = constructImageUrl(section.getVideo3());
+                    image = section.getVideo3();
                     title = "Trending Video";
                     text = section.getVideoText3();
                     isVideo = true; // Set isVideo to true for videos
@@ -438,6 +450,78 @@ public class Mapping {
                 case "item15":
                     image = constructImageUrl(section.getImage15());
                     break;
+                case "item16":
+                    image = constructImageUrl(section.getImage16());
+                    break;
+                case "item17":
+                    image = constructImageUrl(section.getImage17());
+                    break;
+                case "item18":
+                    image = constructImageUrl(section.getImage18());
+                    break;
+                case "item19":
+                    image = constructImageUrl(section.getImage19());
+                    break;
+                case "item20":
+                    image = constructImageUrl(section.getImage20());
+                    break;
+                case "item21":
+                    image = constructImageUrl(section.getImage21());
+                    break;
+                case "item22":
+                    image = constructImageUrl(section.getImage22());
+                    break;
+                case "item23":
+                    image = constructImageUrl(section.getImage23());
+                    break;
+                case "item24":
+                    image = constructImageUrl(section.getImage24());
+                    break;
+                case "item25":
+                    image = constructImageUrl(section.getImage25());
+                    break;
+                case "item26":
+                    image = constructImageUrl(section.getImage26());
+                    break;
+                case "item28":
+                    image = constructImageUrl(section.getImage28());
+                    break;
+                case "item29":
+                    image = constructImageUrl(section.getImage29());
+                    break;
+                case "item30":
+                    image = constructImageUrl(section.getImage30());
+                    break;
+                case "item31":
+                    image = constructImageUrl(section.getImage31());
+                    break;
+                case "item32":
+                    image = constructImageUrl(section.getImage32());
+                    break;
+                case "item33":
+                    image = constructImageUrl(section.getImage33());
+                    break;
+                case "item34":
+                    image = constructImageUrl(section.getImage34());
+                    break;
+                case "item35":
+                    image = constructImageUrl(section.getImage35());
+                    break;
+                case "item36":
+                    image = constructImageUrl(section.getImage36());
+                    break;
+                case "item37":
+                    image = constructImageUrl(section.getImage37());
+                    break;
+                case "item38":
+                    image = constructImageUrl(section.getImage38());
+                    break;
+                case "item39":
+                    image = constructImageUrl(section.getImage39());
+                    break;
+                case "item40":
+                    image = constructImageUrl(section.getImage40());
+                    break;
                 default:
                     throw new RuntimeException("Invalid fourth parameter");
             }
@@ -446,7 +530,8 @@ public class Mapping {
             title = "";
             text = "";
         } else {
-            throw new RuntimeException("Invalid request: neither sidebar, second, third, fourth, nor andhra parameter provided");
+            throw new RuntimeException(
+                    "Invalid request: neither sidebar, second, third, fourth, nor andhra parameter provided");
         }
 
         model.addAttribute("mainImage", image);
@@ -461,9 +546,9 @@ public class Mapping {
 
     @GetMapping("/detail/{id}")
     public String showDetailPage2(@PathVariable String id,
-                                  @RequestParam String category,
-                                  @RequestParam(required = false) String section,
-                                  Model model) {
+            @RequestParam String category,
+            @RequestParam(required = false) String section,
+            Model model) {
         List<HomePageContent> contentList = contentService.getAllContent();
 
         List<News> newsList = newsService.getNewsByCategory(category);
@@ -475,7 +560,7 @@ public class Mapping {
         model.addAttribute("newsList", newsList);
 
         // Default values
-        String image = "";  
+        String image = "";
         String title = "";
         String text = "";
         String addText = "";
@@ -543,7 +628,7 @@ public class Mapping {
                     title = news.getSidebar10Title();
                     text = news.getSidebar10Text();
                     break;
-                    case "sidebar11":
+                case "sidebar11":
                     image = news.getSidebar11Image();
                     title = news.getSidebar11Title();
                     text = news.getSidebar11Text();
@@ -593,7 +678,6 @@ public class Mapping {
                     title = news.getSidebar20Title();
                     text = news.getSidebar20Text();
                     break;
-                
 
                 case "right1":
                     image = news.getRightImage1();
@@ -682,18 +766,24 @@ public class Mapping {
         return "contact";
     }
 
+    @GetMapping("/privacy")
+    public String privacy(Model model) {
+        List<HomePageContent> contentList = contentService.getAllContent();
+        model.addAttribute("contentList", contentList);
+        return "privacy";
+    }
+
     @GetMapping("/details-news")
     public String details() {
-      return "details-news";
+        return "details-news";
     }
 
     @GetMapping("/epaper")
     public String epaper(Model model) {
 
-            // Fetch the latest Epaper data
+        // Fetch the latest Epaper data
         Epaper epaper = epaperService.getLatestContent();
         List<HomePageContent> contentList = contentService.getAllContent();
-       
 
         // Construct full URLs for images and PDFs
         if (epaper != null) {
@@ -710,9 +800,7 @@ public class Mapping {
         // Add the Epaper object to the model
         model.addAttribute("epaper", epaper);
         model.addAttribute("contentList", contentList);
-        
 
-    
         return "epaper";
     }
 
@@ -738,6 +826,31 @@ public class Mapping {
             section.setImage13(constructImageUrl(section.getImage13()));
             section.setImage14(constructImageUrl(section.getImage14()));
             section.setImage15(constructImageUrl(section.getImage15()));
+            section.setImage15(constructImageUrl(section.getImage16()));
+            section.setImage15(constructImageUrl(section.getImage17()));
+            section.setImage15(constructImageUrl(section.getImage18()));
+            section.setImage15(constructImageUrl(section.getImage19()));
+            section.setImage15(constructImageUrl(section.getImage20()));
+            section.setImage1(constructImageUrl(section.getImage21()));
+            section.setImage2(constructImageUrl(section.getImage22()));
+            section.setImage3(constructImageUrl(section.getImage23()));
+            section.setImage4(constructImageUrl(section.getImage24()));
+            section.setImage5(constructImageUrl(section.getImage25()));
+            section.setImage6(constructImageUrl(section.getImage26()));
+            section.setImage7(constructImageUrl(section.getImage27()));
+            section.setImage8(constructImageUrl(section.getImage28()));
+            section.setImage9(constructImageUrl(section.getImage29()));
+            section.setImage10(constructImageUrl(section.getImage30()));
+            section.setImage1(constructImageUrl(section.getImage31()));
+            section.setImage2(constructImageUrl(section.getImage32()));
+            section.setImage3(constructImageUrl(section.getImage33()));
+            section.setImage4(constructImageUrl(section.getImage34()));
+            section.setImage5(constructImageUrl(section.getImage35()));
+            section.setImage6(constructImageUrl(section.getImage36()));
+            section.setImage7(constructImageUrl(section.getImage37()));
+            section.setImage8(constructImageUrl(section.getImage38()));
+            section.setImage9(constructImageUrl(section.getImage39()));
+            section.setImage10(constructImageUrl(section.getImage40()));
         }
 
         model.addAttribute("contentList", contentList);
@@ -753,22 +866,23 @@ public class Mapping {
         }
         return baseUrl + imagePath.replace("\\", "/");
     }
-    // Helper method to construct full URLs for files (images or PDFs)
-private String constructFileUrl(String filePath, String baseUrl) {
-    if (filePath == null || filePath.isEmpty()) {
-        return ""; // Return an empty string or a default URL
-    }
-    return baseUrl + filePath.replace("\\", "/");
-}
 
-// Helper method to construct full URLs for Epaper images and PDFs
-private void constructEpaperUrls(Epaper epaper, String imageBaseUrl, String pdfBaseUrl) {
-    epaper.setEdition1Image(constructFileUrl(epaper.getEdition1Image(), imageBaseUrl));
-    epaper.setEdition1PdfFile(constructFileUrl(epaper.getEdition1PdfFile(), pdfBaseUrl));
-    epaper.setEdition2Image(constructFileUrl(epaper.getEdition2Image(), imageBaseUrl));
-    epaper.setEdition2PdfFile(constructFileUrl(epaper.getEdition2PdfFile(), pdfBaseUrl));
-    epaper.setAdvertisementImage(constructFileUrl(epaper.getAdvertisementImage(), imageBaseUrl));
-}
+    // Helper method to construct full URLs for files (images or PDFs)
+    private String constructFileUrl(String filePath, String baseUrl) {
+        if (filePath == null || filePath.isEmpty()) {
+            return ""; // Return an empty string or a default URL
+        }
+        return baseUrl + filePath.replace("\\", "/");
+    }
+
+    // Helper method to construct full URLs for Epaper images and PDFs
+    private void constructEpaperUrls(Epaper epaper, String imageBaseUrl, String pdfBaseUrl) {
+        epaper.setEdition1Image(constructFileUrl(epaper.getEdition1Image(), imageBaseUrl));
+        epaper.setEdition1PdfFile(constructFileUrl(epaper.getEdition1PdfFile(), pdfBaseUrl));
+        epaper.setEdition2Image(constructFileUrl(epaper.getEdition2Image(), imageBaseUrl));
+        epaper.setEdition2PdfFile(constructFileUrl(epaper.getEdition2PdfFile(), pdfBaseUrl));
+        epaper.setAdvertisementImage(constructFileUrl(epaper.getAdvertisementImage(), imageBaseUrl));
+    }
 
     // Helper method to construct full URLs for News images
     private void constructImageUrls(News news) {
@@ -794,7 +908,6 @@ private void constructEpaperUrls(Epaper epaper, String imageBaseUrl, String pdfB
         news.setSidebar19Image(constructImageUrl(news.getSidebar19Image()));
         news.setSidebar20Image(constructImageUrl(news.getSidebar20Image()));
 
-
         news.setRightImage1(constructImageUrl(news.getRightImage1()));
         news.setRightImage2(constructImageUrl(news.getRightImage2()));
 
@@ -809,93 +922,88 @@ private void constructEpaperUrls(Epaper epaper, String imageBaseUrl, String pdfB
         news.setImage9(constructImageUrl(news.getImage9()));
         news.setImage10(constructImageUrl(news.getImage10()));
 
-        
     }
 
-@GetMapping("/search")
-public String search(@RequestParam("category") String category) {
-    // Redirect to the respective category page
-    switch (category.toLowerCase()) {
-        case "andhrapradesh":
-            return "redirect:/category?category=Andhrapradesh";
-        case "telangana":
-            return "redirect:/category?category=Telangana";
-        case "movies":
-            return "redirect:/category?category=Movies";
-        case "environment":
-            return "redirect:/category?category=Environment";
-        case "sports":
-            return "redirect:/category?category=Sports";
-        case "business":
-            return "redirect:/category?category=Business";
-        case "family":
-            return "redirect:/category?category=Family";
-        case "prediction":
-            return "redirect:/category?category=Prediction";
-        case "health":
-            return "redirect:/category?category=Health";
-        case "education":
-            return "redirect:/category?category=Education";
-        default:
-            return "redirect:/error?message=No results found for: " + category;
-    }
-}
-
-
-
-@GetMapping("donation")
-public String donation(Model model) {
-    List<HomePageContent> contentList = contentService.getAllContent();
-    model.addAttribute("contentList", contentList);
-
-    DonationSection donation = donationSectionService.getLatestContent();
-    // Construct full URLs for images and PDFs
-    if (donation != null) {
-        String imageBaseUrl = "https://admin.epdcindia.com/uploads/";
-        donation.setImage(constructFileUrl(donation.getImage(), imageBaseUrl));
-       }
-
-    // Add the Epaper object to the model
-    model.addAttribute("donation", donation);
-
-    // Check if feedbackSuccess is already in the model (from redirect)
-    if (!model.containsAttribute("feedbackSuccess")) {
-        model.addAttribute("feedbackSuccess", false); // Default to false
-    }
-     // Fetch only approved feedback from the database
-     List<Feedback> approvedFeedback = feedbackService.getApprovedFeedback();
-    
-     // Pass the approved feedback list to the model
-     model.addAttribute("approvedFeedback", approvedFeedback);
-     
-        
-    return "donation";
+    @GetMapping("/search")
+    public String search(@RequestParam("category") String category) {
+        // Redirect to the respective category page
+        switch (category.toLowerCase()) {
+            case "andhrapradesh":
+                return "redirect:/category?category=Andhrapradesh";
+            case "telangana":
+                return "redirect:/category?category=Telangana";
+            case "movies":
+                return "redirect:/category?category=Movies";
+            case "environment":
+                return "redirect:/category?category=Environment";
+            case "sports":
+                return "redirect:/category?category=Sports";
+            case "business":
+                return "redirect:/category?category=Business";
+            case "family":
+                return "redirect:/category?category=Family";
+            case "prediction":
+                return "redirect:/category?category=Prediction";
+            case "health":
+                return "redirect:/category?category=Health";
+            case "education":
+                return "redirect:/category?category=Education";
+            default:
+                return "redirect:/error?message=No results found for: " + category;
+        }
     }
 
-     // Endpoint to submit feedback
-  @PostMapping("/submit-feedback")
-  public String submitFeedback(@ModelAttribute Feedback feedback, RedirectAttributes redirectAttributes) {
-    // Save the feedback
-    feedbackService.saveFeedback(feedback);
+    @GetMapping("donation")
+    public String donation(Model model) {
+        List<HomePageContent> contentList = contentService.getAllContent();
+        model.addAttribute("contentList", contentList);
 
-    // Add flash attribute for success message
-    redirectAttributes.addFlashAttribute("feedbackSuccess", true);
+        DonationSection donation = donationSectionService.getLatestContent();
+        // Construct full URLs for images and PDFs
+        if (donation != null) {
+            String imageBaseUrl = "https://admin.epdcindia.com/uploads/";
+            donation.setImage(constructFileUrl(donation.getImage(), imageBaseUrl));
+        }
 
-    // Redirect back to the donation page
-    return "redirect:/donation";
-}
+        // Add the Epaper object to the model
+        model.addAttribute("donation", donation);
 
+        // Check if feedbackSuccess is already in the model (from redirect)
+        if (!model.containsAttribute("feedbackSuccess")) {
+            model.addAttribute("feedbackSuccess", false); // Default to false
+        }
+        // Fetch only approved feedback from the database
+        List<Feedback> approvedFeedback = feedbackService.getApprovedFeedback();
 
-@PostMapping("/submit-feedback-user")
-public String submitUserFeedback(@ModelAttribute UserFeedBack feedback, RedirectAttributes redirectAttributes) {
-    // Save the feedback
-    userfeedbackService.saveFeedback(feedback);
+        // Pass the approved feedback list to the model
+        model.addAttribute("approvedFeedback", approvedFeedback);
 
-    // Add flash attribute for success message
-    redirectAttributes.addFlashAttribute("feedbackSuccess", true);
+        return "donation";
+    }
 
-    // Redirect to the contact page
-    return "redirect:/contact";
-}
+    // Endpoint to submit feedback
+    @PostMapping("/submit-feedback")
+    public String submitFeedback(@ModelAttribute Feedback feedback, RedirectAttributes redirectAttributes) {
+        // Save the feedback
+        feedbackService.saveFeedback(feedback);
+
+        // Add flash attribute for success message
+        redirectAttributes.addFlashAttribute("feedbackSuccess", true);
+
+        // Redirect back to the donation page
+        return "redirect:/donation";
+    }
+
+    @PostMapping("/submit-feedback-user")
+    public String submitUserFeedback(@ModelAttribute UserFeedBack feedback, RedirectAttributes redirectAttributes) {
+        // Save the feedback
+        userfeedbackService.saveFeedback(feedback);
+
+        // Add flash attribute for success message
+        redirectAttributes.addFlashAttribute("feedbackSuccess", true);
+
+        // Redirect to the contact page
+        return "redirect:/contact";
+    }
 
 }

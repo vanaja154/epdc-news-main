@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPDC</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="images/globe-removebg-preview.png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H8R8GZQGKK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H8R8GZQGKK");
+    </script>
+
     <link rel="stylesheet" href="donation.css" />
     <link rel="stylesheet" th:href="@{/header.css}" />
     <link rel="stylesheet" th:href="@{/footer.css}" />
@@ -21,7 +41,6 @@
       display: flex;
       overflow: hidden;
       width: 100%;
-
     }
 
     .feedback-card {
@@ -34,7 +53,6 @@
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       animation: slideLeft 20s linear infinite;
-
     }
 
     .feedback-card p {
@@ -89,8 +107,9 @@
         width: 96%;
       }
       .approved-feedback-section {
-        margin-top: 520px;
+        margin-top: 617px;
       }
+      
       .feedback-card span p {
         font-size: 12px;
       }
@@ -146,11 +165,11 @@
           <!-- <button id="share">Share</button> -->
 
           <!-- Hidden Link (Optional) -->
-  <ul style="display: none;">
-    <li>
-      <a id="whatsapp-link" href="https://whatsapp.com"></a>
-    </li>
-  </ul>
+          <ul style="display: none">
+            <li>
+              <a id="whatsapp-link" href="https://whatsapp.com"></a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -257,17 +276,17 @@
     <div th:replace="~{footer :: footer}"></div>
 
     <script>
-          // Select the share button
-    const shareButton = document.getElementById('share');
+      // Select the share button
+      const shareButton = document.getElementById("share");
 
-// Define the WhatsApp link
-const whatsappLink = 'https://whatsapp.com';
+      // Define the WhatsApp link
+      const whatsappLink = "https://whatsapp.com";
 
-// Add a click event listener to the button
-shareButton.addEventListener('click', () => {
-  // Redirect the user to the WhatsApp link
-  window.location.href = whatsappLink;
-});
+      // Add a click event listener to the button
+      shareButton.addEventListener("click", () => {
+        // Redirect the user to the WhatsApp link
+        window.location.href = whatsappLink;
+      });
     </script>
   </body>
 </html>

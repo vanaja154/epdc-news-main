@@ -2,12 +2,14 @@
     max-width: 1200px;
     margin: 20px auto;
     padding: 10px;
+    position: relative;
+    top: 80px;
   }
 
   .featured-news h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    border-left: 4px solid #9acd32;
+    border-left: 4px solid #1a4d2e;
     padding-left: 10px;
   }
 

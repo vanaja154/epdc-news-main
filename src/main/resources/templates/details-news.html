@@ -1,78 +1,151 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EPDC</title>
-  <link rel="stylesheet" th:href="@{/style.css}">
-  <link rel="stylesheet" th:href="@{/header.css}">
-  <link rel="stylesheet" th:href="@{/footer.css}" />
-  <link rel="stylesheet" th:href="@{/scrolling.css}" />
-  <script src="/darkmode.js"></script>
-  
-  <style>
-    .detail-container {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPDC</title>
+    <link
+      rel="icon"
+      type="image/png"
+      th:href="@{/images/globe-removebg-preview.png}"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H8R8GZQGKK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H8R8GZQGKK");
+    </script>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link rel="stylesheet" th:href="@{/header.css}" />
+    <link rel="stylesheet" th:href="@{/footer.css}" />
+    <link rel="stylesheet" th:href="@{/scrolling.css}" />
+    <script src="/darkmode.js"></script>
+    <style>
+      .social-icons-footer a {
+        color: black;
+      }
+    </style>
+
+    <style>
+      .detail-container {
         max-width: 800px;
         margin: 50px auto;
         background: #fff;
         padding: 20px;
         border-radius: 8px;
         text-align: center;
-    }
-    
-    /* Title Styling */
-    .detail-container h2 {
+        margin-top: 127px;
+      }
+
+      /* Title Styling */
+      .detail-container h2 {
         font-size: 26px;
         font-weight: bold;
         color: #2c3e50;
         margin-bottom: 15px;
         text-align: justify;
-    }
-    
-    /* Image/Video Styling */
-    .main-image, .main-video {
+      }
+
+      /* Image/Video Styling */
+      .main-image,
+      .main-video {
         width: 100%;
         max-height: 100%;
         /* object-fit: cover; */
         border-radius: 8px;
         margin-bottom: 15px;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    /* Paragraph Styling */
-    .detail-container p {
+      }
+
+      /* Paragraph Styling */
+      .detail-container p {
         font-size: 18px;
         line-height: 1.6;
         color: #555;
         text-align: justify;
         margin-bottom: 10px;
-    }
+      }
 
-  </style>
-</head>
-<body>
-
+      @media (max-width: 430px) {
+        .mainheader h1 {
+          margin-left: 0px;
+        }
+        .detail-container {
+          margin-top: 137px;
+        }
+        .text-container p {
+          margin-top: -40px;
+        }
+        .featured-news {
+          top: 0;
+        }
+        footer {
+          top: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        .mainheader h1 {
+          margin-left: 37px;
+        }
+        .text-container p {
+          margin-top: -40px;
+        }
+        .detail-container {
+          margin-top: 137px;
+        }
+        header {
+          top: 91px;
+        }
+      }
+      @media (max-width: 1024px) {
+        .mainheader h1 {
+          font-size: 16px;
+          margin-left: 35px;
+        }
+        .text-container p {
+          margin-top: -40px;
+        }
+        header {
+          top: 91px;
+        }
+        .featured-news {
+          top: 0;
+        }
+        footer {
+          top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <!-- Header -->
     <div th:replace="~{header :: header}"></div>
 
     <script defer src="/header.js"></script>
     <!-- Detail Container -->
     <div class="detail-container">
-        <h2 th:text="${title}"></h2>  
-        
-        <!-- Conditionally render image or video -->
-        <div th:if="${isVideo}">
-            <video class="main-video" controls>
-                <source th:src="@{${mainImage}}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div th:unless="${isVideo}">
-            <img class="main-image" th:src="@{${mainImage}}" alt="Image">
-        </div>
-        
-        <p th:text="${mainText}"></p>
-        <!-- <p th:text="${addText}"></p> -->
+      <h2 th:text="${title}"></h2>
+
+      <!-- Conditionally render image or video -->
+      <div th:if="${isVideo}">
+        <video class="main-video" controls>
+          <source th:src="@{${mainImage}}" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div th:unless="${isVideo}">
+        <img class="main-image" th:src="@{${mainImage}}" alt="Image" />
+      </div>
+
+      <p th:text="${mainText}"></p>
     </div>
 
     <div class="featured-news">
@@ -200,66 +273,91 @@
         </div>
 
         <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item7')}">
+          <a
+            th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item7')}"
+          >
             <img th:src="${section.image7}" alt="News Image" />
             <div class="info">
               <div class="tag-date">
-                <span th:text="${#strings.substring(section.title7, 0, 10)} + '...'" class="tag"></span>
+                <span
+                  th:text="${#strings.substring(section.title7, 0, 10)} + '...'"
+                  class="tag"
+                ></span>
               </div>
-              <h3 th:text="${#strings.substring(section.text7, 0, 30)} + '...'"></h3>
+              <h3
+                th:text="${#strings.substring(section.text7, 0, 30)} + '...'"
+              ></h3>
             </div>
           </a>
         </div>
-    
+
         <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item8')}">
+          <a
+            th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item8')}"
+          >
             <img th:src="${section.image8}" alt="News Image" />
             <div class="info">
               <div class="tag-date">
-                <span th:text="${#strings.substring(section.title8, 0, 10)} + '...'" class="tag"></span>
+                <span
+                  th:text="${#strings.substring(section.title8, 0, 10)} + '...'"
+                  class="tag"
+                ></span>
               </div>
-              <h3 th:text="${#strings.substring(section.text8, 0, 30)} + '...'"></h3>
+              <h3
+                th:text="${#strings.substring(section.text8, 0, 30)} + '...'"
+              ></h3>
             </div>
           </a>
         </div>
-    
+
         <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item9')}">
+          <a
+            th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item9')}"
+          >
             <img th:src="${section.image9}" alt="News Image" />
             <div class="info">
               <div class="tag-date">
-                <span th:text="${#strings.substring(section.title9, 0, 10)} + '...'" class="tag"></span>
+                <span
+                  th:text="${#strings.substring(section.title9, 0, 10)} + '...'"
+                  class="tag"
+                ></span>
               </div>
-              <h3 th:text="${#strings.substring(section.text9, 0, 30)} + '...'"></h3>
+              <h3
+                th:text="${#strings.substring(section.text9, 0, 30)} + '...'"
+              ></h3>
             </div>
           </a>
         </div>
-    
+
         <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item10')}">
+          <a
+            th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item10')}"
+          >
             <img th:src="${section.image10}" alt="News Image" />
             <div class="info">
               <div class="tag-date">
-                <span th:text="${#strings.substring(section.title10, 0, 10)} + '...'" class="tag"></span>
+                <span
+                  th:text="${#strings.substring(section.title10, 0, 10)} + '...'"
+                  class="tag"
+                ></span>
               </div>
-              <h3 th:text="${#strings.substring(section.text10, 0, 30)} + '...'"></h3>
+              <h3
+                th:text="${#strings.substring(section.text10, 0, 30)} + '...'"
+              ></h3>
             </div>
           </a>
         </div>
-    
-
       </div>
-
     </div>
-
 
     <div></div>
 
     <div th:replace="~{footer :: footer}"></div>
+  </body>
 
-</body>
-
-<script src="https://kit.fontawesome.com/109a493327.js" crossorigin="anonymous"></script>
-<script src="darkmode.js"></script> 
-
+  <script
+    src="https://kit.fontawesome.com/109a493327.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="darkmode.js"></script>
 </html>

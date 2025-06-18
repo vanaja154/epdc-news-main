@@ -4,6 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPDC</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="images/globe-removebg-preview.png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H8R8GZQGKK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H8R8GZQGKK");
+    </script>
     <script
       src="https://kit.fontawesome.com/109a493327.js"
       crossorigin="anonymous"
@@ -26,326 +45,454 @@
       }
 
       #moreButton {
-  background-color: #9acd32; 
-  color: white; 
-  border: none; 
-  padding: 10px 20px;
-  font-size: 16px; 
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer; 
-  transition: background-color 0.3s ease, transform 0.2s ease; 
-  margin-top: 20px; 
-  display: block;
-  width: 100%; 
-  text-align: center; 
-}
+        background-color: #9acd32;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
 
-#moreButton:hover {
-  background-color: #7cb342; 
-  transform: translateY(-2px); 
-}
+      #moreButton:hover {
+        background-color: #7cb342;
+        transform: translateY(-2px);
+      }
 
-#moreButton:active {
-  background-color: #689f38; 
-  transform: translateY(0); 
-}
+      #moreButton:active {
+        background-color: #689f38;
+        transform: translateY(0);
+      }
 
-#moreButton:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(154, 205, 50, 0.5); 
-}
+      #moreButton:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(154, 205, 50, 0.5);
+      }
     </style>
   </head>
   <body>
     <div th:replace="~{header :: header}"></div>
 
+    <div class="main-container">
+      <div th:each="section : ${newsList}" class="container2">
+        <!-- Left Section -->
+        <div class="left-section">
+          <div class="section">
+            <h2 th:text="${category} + ' News'"></h2>
 
-    <div th:each="section : ${newsList}" class="container2">
-      <!-- Left Section -->
-      <div class="left-section">
-        <div class="section">
-          <h2 th:text="${category} + ' News'"></h2>
+            <!-- Sidebar 1 to 5 (Visible by default) -->
+            <div class="news-item">
+              <a
+                th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar1')}"
+              >
+                <img
+                  th:src="${section.sidebar1Image}"
+                  alt="Latest Sports News | EPCD News,Sidebar 1 Image"
+                />
+                <div class="matter">
+                  <h3
+                    th:text="${#strings.substring(section.sidebar1Title, 0, 25)} + '...'"
+                  ></h3>
+                  <p
+                    th:text="${#strings.substring(section.sidebar1Text, 0, 90)} + '...'"
+                  ></p>
+                </div>
+              </a>
+            </div>
 
-          <!-- Sidebar 1 to 5 (Visible by default) -->
-          <div class="news-item">
-            <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar1')}">
-              <img th:src="${section.sidebar1Image}" alt="Sidebar 1 Image" />
-              <div class="matter">
-                <h3 th:text="${#strings.substring(section.sidebar1Title, 0, 25)} + '...'"></h3>
-                <p th:text="${#strings.substring(section.sidebar1Text, 0, 90)} + '...'"></p>
-              </div>
-            </a>
+            <div class="news-item">
+              <a
+                th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar2')}"
+              >
+                <img
+                  th:src="${section.sidebar2Image}"
+                  alt="Sports Updates – Breaking News, Match Results, and Player Highlights,Sidebar 2 Image"
+                />
+                <div class="matter">
+                  <h3
+                    th:text="${#strings.substring(section.sidebar2Title, 0, 25)} + '...'"
+                  ></h3>
+                  <p
+                    th:text="${#strings.substring(section.sidebar2Text, 0, 90)} + '...'"
+                  ></p>
+                </div>
+              </a>
+            </div>
+
+            <div class="news-item">
+              <a
+                th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar3')}"
+              >
+                <img
+                  th:src="${section.sidebar3Image}"
+                  alt="Football News – Latest Matches, Scores, and Football Highlights | EPCD News,Sidebar 3 Image"
+                />
+                <div class="matter">
+                  <h3
+                    th:text="${#strings.substring(section.sidebar3Title, 0, 25)} + '...'"
+                  ></h3>
+                  <p
+                    th:text="${#strings.substring(section.sidebar3Text, 0, 90)} + '...'"
+                  ></p>
+                </div>
+              </a>
+            </div>
+
+            <div class="news-item">
+              <a
+                th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar4')}"
+              >
+                <img
+                  th:src="${section.sidebar4Image}"
+                  alt="Basketball News – Live Game Updates, Scores, and Player Stats | EPCD News,Sidebar 4 Image"
+                />
+                <div class="matter">
+                  <h3
+                    th:text="${#strings.substring(section.sidebar4Title, 0, 25)} + '...'"
+                  ></h3>
+                  <p
+                    th:text="${#strings.substring(section.sidebar4Text, 0, 90)} + '...'"
+                  ></p>
+                </div>
+              </a>
+            </div>
+
+            <div class="news-item">
+              <a
+                th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar5')}"
+              >
+                <img
+                  th:src="${section.sidebar5Image}"
+                  alt="Cricket News – Latest Cricket Scores and Match Results | EPCD News,Sidebar 5 Image"
+                />
+                <div class="matter">
+                  <h3
+                    th:text="${#strings.substring(section.sidebar5Title, 0, 25)} + '...'"
+                  ></h3>
+                  <p
+                    th:text="${#strings.substring(section.sidebar5Text, 0, 90)} + '...'"
+                  ></p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Sidebar 6 to 20 (Hidden by default) -->
+            <div
+              class="news-item hidden"
+              th:each="i : ${#numbers.sequence(6, 20)}"
+            >
+              <a
+                th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar' + ${i})}"
+              >
+                <img
+                  th:src="${section['sidebar' + i + 'Image']}"
+                  th:alt="'Sidebar ' + ${i} + ' Image'"
+                />
+                <div class="matter">
+                  <h3
+                    th:text="${#strings.substring(section['sidebar' + i + 'Title'], 0, 25)} + '...'"
+                  ></h3>
+                  <p
+                    th:text="${#strings.substring(section['sidebar' + i + 'Text'], 0, 90)} + '...'"
+                  ></p>
+                </div>
+              </a>
+            </div>
+
+            <!-- "More" Button -->
+            <button id="moreButton" onclick="showMore()">More</button>
           </div>
-
-          <div class="news-item">
-            <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar2')}">
-              <img th:src="${section.sidebar2Image}" alt="Sidebar 2 Image" />
-              <div class="matter">
-                <h3 th:text="${#strings.substring(section.sidebar2Title, 0, 25)} + '...'"></h3>
-                <p th:text="${#strings.substring(section.sidebar2Text, 0, 90)} + '...'"></p>
-              </div>
-            </a>
-          </div>
-
-          <div class="news-item">
-            <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar3')}">
-              <img th:src="${section.sidebar3Image}" alt="Sidebar 3 Image" />
-              <div class="matter">
-                <h3 th:text="${#strings.substring(section.sidebar3Title, 0, 25)} + '...'"></h3>
-                <p th:text="${#strings.substring(section.sidebar3Text, 0, 90)} + '...'"></p>
-              </div>
-            </a>
-          </div>
-
-          <div class="news-item">
-            <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar4')}">
-              <img th:src="${section.sidebar4Image}" alt="Sidebar 4 Image" />
-              <div class="matter">
-                <h3 th:text="${#strings.substring(section.sidebar4Title, 0, 25)} + '...'"></h3>
-                <p th:text="${#strings.substring(section.sidebar4Text, 0, 90)} + '...'"></p>
-              </div>
-            </a>
-          </div>
-
-          <div class="news-item">
-            <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar5')}">
-              <img th:src="${section.sidebar5Image}" alt="Sidebar 5 Image" />
-              <div class="matter">
-                <h3 th:text="${#strings.substring(section.sidebar5Title, 0, 25)} + '...'"></h3>
-                <p th:text="${#strings.substring(section.sidebar5Text, 0, 90)} + '...'"></p>
-              </div>
-            </a>
-          </div>
-
-          <!-- Sidebar 6 to 20 (Hidden by default) -->
-          <div class="news-item hidden" th:each="i : ${#numbers.sequence(6, 20)}">
-            <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='sidebar' + ${i})}">
-              <img th:src="${section['sidebar' + i + 'Image']}" th:alt="'Sidebar ' + ${i} + ' Image'" />
-              <div class="matter">
-                <h3 th:text="${#strings.substring(section['sidebar' + i + 'Title'], 0, 25)} + '...'"></h3>
-                <p th:text="${#strings.substring(section['sidebar' + i + 'Text'], 0, 90)} + '...'"></p>
-              </div>
-            </a>
-          </div>
-
-          <!-- "More" Button -->
-          <button id="moreButton" onclick="showMore()">More</button>
         </div>
-      </div>
 
-      <!-- Right Section -->
-      <div class="rightadd">
+        <!-- Right Section -->
+        <!-- <div class="rightadd">
         <div class="right-section" id="addsection">
           <div class="section ad-section">
-            <a th:href="@{/detail/{id}(id=${section.id},category=${category}, section='right1')}" class="sidebar-link">
+            <a
+              th:href="${section.rightImage1Link}"
+              target="_blank"
+              class="sidebar-link"
+            >
               <img th:src="${section.rightImage1}" alt="right image" />
             </a>
           </div>
         </div>
         <div class="right-section" id="addsection">
           <div class="section ad-section">
-            <a th:href="@{/detail/{id}(id=${section.id},category=${category}, section='right2')}" class="sidebar-link">
+            <!-- <a th:href="@{/detail/{id}(id=${section.id},category=${category}, section='right2')}" class="sidebar-link"> 
+            <a
+              th:href="${section.rightImage2Link}"
+              target="_blank"
+              class="sidebar-link"
+            >
               <img th:src="${section.rightImage2}" alt="right image" />
+            </a>
+          </div>
+        </div>
+      </div> -->
+
+        <!-- Right Section -->
+        <div class="rightadd" style="position: relative">
+          <div class="right-section" id="addsection">
+            <!-- <div style="position: absolute;top: 8px;left: 10px;">
+            <p>Ad</p>
+          </div> -->
+            <div class="section ad-section" style="position: relative">
+              <div>
+                <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+              </div>
+              <!-- First Right Image -->
+              <a
+                th:href="${section.rightImage1Link}"
+                target="_blank"
+                class="sidebar-link"
+              >
+                <img th:src="${section.rightImage1}" alt="Right Image 1" />
+              </a>
+            </div>
+          </div>
+          <div class="right-section" id="addsection">
+            <div class="section ad-section" style="position: relative">
+              <div>
+                <p style="position: absolute; top: 8px; left: 10px">Ad</p>
+              </div>
+              <!-- Second Right Image -->
+              <a th:href="${section.rightImage2Link}" class="sidebar-link">
+                <img th:src="${section.rightImage2}" alt="Right Image 2" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="featured-news">
+        <!-- <h2>Treanding News Of Andhrapradesh</h2> -->
+
+        <h2 th:text="'Trending News Of ' + ${category}"></h2>
+
+        <div
+          th:each="section : ${newsList}"
+          class="news-container"
+          id="newsContainer"
+        >
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id}, category=${category},section='item1')}"
+            >
+              <img
+                th:src="${section.image1}"
+                alt="Sports News – Coverage of Football, Basketball, Cricket, and More | EPCD News,News Image"
+              />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title1, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text1, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item2')}"
+            >
+              <img
+                th:src="${section.image2}"
+                alt="Sports News – Coverage of Football, Basketball, Cricket, and More | EPCD News,News Image"
+              />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title2, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text2, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item3')}"
+            >
+              <img th:src="${section.image3}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title3, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text3, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item4')}"
+            >
+              <img th:src="${section.image4}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title4, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text4, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item5')}"
+            >
+              <img th:src="${section.image5}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title5, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text5, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item6')}"
+            >
+              <img th:src="${section.image6}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title6, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text6, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item7')}"
+            >
+              <img th:src="${section.image7}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title7, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text7, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item8')}"
+            >
+              <img th:src="${section.image8}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title8, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text8, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item9')}"
+            >
+              <img th:src="${section.image9}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title9, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text9, 0, 30)} + '...'"
+                ></h3>
+              </div>
+            </a>
+          </div>
+
+          <div class="news-card">
+            <a
+              th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item10')}"
+            >
+              <img th:src="${section.image10}" alt="News Image" />
+              <div class="info">
+                <div class="tag-date">
+                  <span
+                    th:text="${#strings.substring(section.title10, 0, 10)} + '...'"
+                    class="tag"
+                  ></span>
+                </div>
+                <h3
+                  th:text="${#strings.substring(section.text10, 0, 30)} + '...'"
+                ></h3>
+              </div>
             </a>
           </div>
         </div>
       </div>
 
+      <div th:replace="~{footer :: footer}"></div>
     </div>
-
-    <div class="featured-news">
-      <!-- <h2>Treanding News Of Andhrapradesh</h2> -->
-
-      <h2 th:text="'Trending News Of ' + ${category}"></h2>
-
-      <div
-        th:each="section : ${newsList}"
-        class="news-container"
-        id="newsContainer"
-      >
-        <div class="news-card">
-          <a
-            th:href="@{/detail/{id}(id=${section.id}, category=${category},section='item1')}"
-          >
-            <img th:src="${section.image1}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span
-                  th:text="${#strings.substring(section.title1, 0, 10)} + '...'"
-                  class="tag"
-                ></span>
-              </div>
-              <h3
-                th:text="${#strings.substring(section.text1, 0, 30)} + '...'"
-              ></h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="news-card">
-          <a
-            th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item2')}"
-          >
-            <img th:src="${section.image2}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span
-                  th:text="${#strings.substring(section.title2, 0, 10)} + '...'"
-                  class="tag"
-                ></span>
-              </div>
-              <h3
-                th:text="${#strings.substring(section.text2, 0, 30)} + '...'"
-              ></h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="news-card">
-          <a
-            th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item3')}"
-          >
-            <img th:src="${section.image3}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span
-                  th:text="${#strings.substring(section.title3, 0, 10)} + '...'"
-                  class="tag"
-                ></span>
-              </div>
-              <h3
-                th:text="${#strings.substring(section.text3, 0, 30)} + '...'"
-              ></h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="news-card">
-          <a
-            th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item4')}"
-          >
-            <img th:src="${section.image4}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span
-                  th:text="${#strings.substring(section.title4, 0, 10)} + '...'"
-                  class="tag"
-                ></span>
-              </div>
-              <h3
-                th:text="${#strings.substring(section.text4, 0, 30)} + '...'"
-              ></h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="news-card">
-          <a
-            th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item5')}"
-          >
-            <img th:src="${section.image5}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span
-                  th:text="${#strings.substring(section.title5, 0, 10)} + '...'"
-                  class="tag"
-                ></span>
-              </div>
-              <h3
-                th:text="${#strings.substring(section.text5, 0, 30)} + '...'"
-              ></h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="news-card">
-          <a
-            th:href="@{/detail/{id}(id=${section.id},category=${category}, section='item6')}"
-          >
-            <img th:src="${section.image6}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span
-                  th:text="${#strings.substring(section.title6, 0, 10)} + '...'"
-                  class="tag"
-                ></span>
-              </div>
-              <h3
-                th:text="${#strings.substring(section.text6, 0, 30)} + '...'"
-              ></h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item7')}">
-            <img th:src="${section.image7}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span th:text="${#strings.substring(section.title7, 0, 10)} + '...'" class="tag"></span>
-              </div>
-              <h3 th:text="${#strings.substring(section.text7, 0, 30)} + '...'"></h3>
-            </div>
-          </a>
-        </div>
-    
-        <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item8')}">
-            <img th:src="${section.image8}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span th:text="${#strings.substring(section.title8, 0, 10)} + '...'" class="tag"></span>
-              </div>
-              <h3 th:text="${#strings.substring(section.text8, 0, 30)} + '...'"></h3>
-            </div>
-          </a>
-        </div>
-    
-        <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item9')}">
-            <img th:src="${section.image9}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span th:text="${#strings.substring(section.title9, 0, 10)} + '...'" class="tag"></span>
-              </div>
-              <h3 th:text="${#strings.substring(section.text9, 0, 30)} + '...'"></h3>
-            </div>
-          </a>
-        </div>
-    
-        <div class="news-card">
-          <a th:href="@{/detail/{id}(id=${section.id}, category=${category}, section='item10')}">
-            <img th:src="${section.image10}" alt="News Image" />
-            <div class="info">
-              <div class="tag-date">
-                <span th:text="${#strings.substring(section.title10, 0, 10)} + '...'" class="tag"></span>
-              </div>
-              <h3 th:text="${#strings.substring(section.text10, 0, 30)} + '...'"></h3>
-            </div>
-          </a>
-        </div>
-    
-
-      </div>
-
-    </div>
-
-
-    <div th:replace="~{footer :: footer}"></div>
     <script src="darkmode.js"></script>
 
     <script>
       // JavaScript to show hidden sidebar items
       function showMore() {
-        const hiddenItems = document.querySelectorAll('.news-item.hidden');
-        hiddenItems.forEach(item => item.classList.remove('hidden'));
+        const hiddenItems = document.querySelectorAll(".news-item.hidden");
+        hiddenItems.forEach((item) => item.classList.remove("hidden"));
 
         // Hide the "More" button after showing all items
-        const moreButton = document.getElementById('moreButton');
-        moreButton.style.display = 'none';
+        const moreButton = document.getElementById("moreButton");
+        moreButton.style.display = "none";
       }
     </script>
-    
   </body>
 </html>

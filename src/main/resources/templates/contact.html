@@ -4,6 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPDC</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="images/globe-removebg-preview.png"
+    />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H8R8GZQGKK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H8R8GZQGKK");
+    </script>
     <script
       src="https://kit.fontawesome.com/109a493327.js"
       crossorigin="anonymous"
@@ -22,8 +41,9 @@
         padding: 20px;
         /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
         border-radius: 8px;
-        margin-top: 20px;
         margin-bottom: 20px;
+        position: relative;
+        top: 120px;
       }
       .info-box {
         margin-bottom: 20px;
@@ -35,6 +55,17 @@
       .info-box p {
         margin: 5px 0;
       }
+       @media (max-width: 430px){
+        .containerc {
+          top: 140px;
+        }
+
+       }
+       @media (max-width: 768px){
+        .containerc {
+          top: 140px;
+        }
+       }
     </style>
   </head>
   <body>
@@ -43,9 +74,7 @@
     <div class="containerc">
       <div class="info-box">
         <h2>Contact Us</h2>
-        <p>
-          <strong>Address:</strong> Nallakunta, Hyderabad-44,
-        </p>
+        <p><strong>Address:</strong> Nallakunta, Hyderabad-44,</p>
         <p><strong>Mobile:</strong>8333949623 , 8179019623</p>
         <!-- <p><strong>Mobile:</strong>8179019623</p> -->
 
@@ -84,18 +113,18 @@
           <button type="submit" class="submit-feedback">Submit Feedback</button>
         </form>
         <!-- Success Message -->
-<div
-th:if="${feedbackSuccess}"
-style="
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #dff0d8;
-  color: #3c763d;
-  border-radius: 4px;
-"
->
-Thank you for your feedback!
-</div>
+        <div
+          th:if="${feedbackSuccess}"
+          style="
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            border-radius: 4px;
+          "
+        >
+          Thank you for your feedback!
+        </div>
       </div>
     </div>
     <div th:replace="~{footer :: footer}"></div>

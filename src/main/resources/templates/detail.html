@@ -4,12 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EPDC</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <link rel="stylesheet" th:href="@{/header.css}">
+    <link
+      rel="icon"
+      type="image/png"
+      th:href="@{/images/globe-removebg-preview.png}"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H8R8GZQGKK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H8R8GZQGKK");
+    </script>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link rel="stylesheet" th:href="@{/header.css}" />
     <link rel="stylesheet" th:href="@{/footer.css}" />
     <link rel="stylesheet" th:href="@{/scrolling.css}" />
     <script src="/darkmode.js"></script>
-    
     <style>
       .detail-container {
         max-width: 800px;
@@ -18,6 +37,7 @@
         padding: 20px;
         border-radius: 8px;
         text-align: center;
+        margin-top: 128px;
       }
 
       /* Title Styling */
@@ -49,9 +69,66 @@
         margin-bottom: 10px;
       }
       a {
-    color: black;
-    text-decoration: none;
-}
+        color: black;
+        text-decoration: none;
+      }
+      .social-icons-footer a {
+        color: black;
+      }
+
+      @media (max-width: 430px) {
+        .mainheader h1 {
+          margin-left: 0px;
+        }
+        .text-container p {
+          margin-top: -40px;
+        }
+        .detail-container {
+          margin-top: 60px;
+        }
+        header {
+          top: 123px;
+        }
+        footer {
+          top: 0;
+        }
+        .featured-news {
+          top: 0;
+        }
+      }
+      @media (max-width: 768px) {
+        .main-video {
+          width: 300px;
+          height: 200px;
+        }
+        .mainheader h1 {
+          margin-left: 37px;
+        }
+        .text-container p {
+          margin-top: -40px;
+        }
+        header {
+          top: 123px;
+        }
+        .detail-container {
+          margin-top: 137px;
+        }
+        .container-main {
+          top: 154px;
+        }
+        footer {
+          top: 0;
+        }
+      }
+      @media (max-width: 1024px) {
+        .mainheader h1 {
+          font-size: 16px;
+          margin-left: 35px;
+        }
+        .text-container p {
+          margin-top: -40px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -59,10 +136,8 @@
     <div th:replace="~{header :: header}"></div>
 
     <!-- Detail Container -->
-    <div class="detail-container">
+    <!-- <div class="detail-container">
       <h2 th:text="${title}"></h2>
-
-      <!-- Conditionally render image or video -->
       <div th:if="${isVideo}">
         <video class="main-video" controls>
           <source th:src="@{${mainImage}}" type="video/mp4" />
@@ -74,8 +149,37 @@
       </div>
 
       <p th:text="${mainText}"></p>
-      <p th:text="${addText}"></p>
-       
+    </div> -->
+
+    <div class="detail-container">
+      <h2 th:text="${title}"></h2>
+
+      <!-- Conditionally render iframe for video or img for image -->
+      <div th:if="${isVideo}">
+        <!-- <iframe
+          class="main-video"
+          th:src="@{${mainImage}}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        >
+        </iframe> -->
+        <iframe
+          class="main-video"
+          width="460"
+          height="460"
+          th:src="'https://www.youtube.com/embed/' + ${#strings.substringAfter(mainImage, 'v=')}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+      <div th:unless="${isVideo}">
+        <img class="main-image" th:src="@{${mainImage}}" alt="Image" />
+      </div>
+
+      <p th:text="${mainText}"></p>
     </div>
 
     <div class="featured-news">
@@ -188,13 +292,10 @@
     <div></div>
 
     <div th:replace="~{footer :: footer}"></div>
-   
-  
+
     <script
       src="https://kit.fontawesome.com/109a493327.js"
       crossorigin="anonymous"
     ></script>
   </body>
-
-
 </html>

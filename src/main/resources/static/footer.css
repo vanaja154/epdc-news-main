@@ -1,7 +1,9 @@
 
 footer {
-    background-color: #eef3f7;
+    background-color: #E8EDEA;
     padding: 30px 20px;
+    position: relative;
+    top: 90px;
 }
 
 .footer-container {
@@ -21,6 +23,9 @@ footer {
 
 .footer-logo img {
     max-width: 150px;
+}
+.footer-para{
+    margin-top: 10px;
 }
 
 .social-icons-footer {
@@ -94,4 +99,7 @@ h2 {
     border-top: 1px solid #ccc;
     font-size: 14px;
     color: #666;
+}
+.footer-bottom a{ 
+    color: #ff6600;
 }

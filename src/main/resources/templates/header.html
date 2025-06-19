@@ -70,28 +70,48 @@
 
           <div class="links">
             <div class="social-icons">
-              <a href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"
-                ><i class="fa-brands fa-whatsapp"></i
-              ></a>
-              <a href="https://x.com/epdc225709?s=11"
-                ><i class="fa-brands fa-twitter"></i
-              ></a>
+              <a
+                href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+              <a
+                href="https://x.com/epdc225709?s=11"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-twitter"></i>
+              </a>
               <a
                 href="https://www.facebook.com/share/167tSVQ9yY/?mibextid=wwXIfr"
-                ><i class="fa-brands fa-facebook"></i
-              ></a>
-
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-facebook"></i>
+              </a>
               <a
                 href="https://www.instagram.com/environment_council/profilecard"
-                ><i class="fa-brands fa-instagram"></i
-              ></a>
-              <a href="https://t.me/epdcindia"
-                ><i class="fa-brands fa-telegram"></i
-              ></a>
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a
+                href="https://t.me/epdcindia"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-telegram"></i>
+              </a>
               <a
                 href="https://youtube.com/@environmentcouncil?si=2DBOX_u-20v-hitC"
-                ><i class="fa-brands fa-youtube"></i
-              ></a>
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-youtube"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -244,7 +264,6 @@
               <a th:href="@{'/category?category=Health'}">హెల్త్‌</a>
             </li>
 
-            
             <li>
               <a th:href="@{'/category?category=Education'}">ఎడ్యుకేషన్</a>
             </li>
@@ -352,7 +371,7 @@
           </div>
         </li>
 
-         <li>
+        <li>
           <a href="https://blogs.epdcindia.com" target="_blank">బ్లాగ్</a>
           <!-- <a th:href="https://blogs.epdcindia.com">బ్లాగ్</a> -->
         </li>
@@ -367,40 +386,67 @@
       </ul>
 
       <!-- Social Media Links -->
-      <ul class="sidebar-social">
+      <!-- <ul class="sidebar-social">
         <li>
-          <a href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"
-            ><i class="fa-brands fa-whatsapp"></i> whatsapp</a
+          <a
+            href="https://whatsapp.com/channel/0029VaXQPYMIN9irM65HUp0y"
+            target="_blank"
+            rel="noopener noreferrer"
           >
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
         </li>
 
         <li>
-          <a href="https://x.com/epdc225709?s=11"
-            ><i class="fa-brands fa-twitter"></i> Twitter</a
+          <a
+            href="https://x.com/epdc225709?s=11"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-        </li>
-        <li>
-          <a href="https://www.facebook.com/share/167tSVQ9yY/?mibextid=wwXIfr"
-            ><i class="fa-brands fa-facebook"></i> Facebook</a
-          >
+            <i class="fa-brands fa-twitter"></i> Twitter
+          </a>
         </li>
 
         <li>
-          <a href="https://www.instagram.com/environment_council/profilecard">
+          <a
+            href="https://www.facebook.com/share/167tSVQ9yY/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-facebook"></i> Facebook
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://www.instagram.com/environment_council/profilecard"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <i class="fa-brands fa-instagram"></i> Instagram
           </a>
         </li>
+
         <li>
-          <a href="https://t.me/epdcindia">
+          <a
+            href="https://t.me/epdcindia"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <i class="fa-brands fa-telegram"></i> Telegram
           </a>
         </li>
+
         <li>
-          <a href="https://youtube.com/@environmentcouncil?si=2DBOX_u-20v-hitC">
+          <a
+            href="https://youtube.com/@environmentcouncil?si=2DBOX_u-20v-hitC"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <i class="fa-brands fa-youtube"></i> YouTube
           </a>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <div class="container-main">
@@ -414,7 +460,7 @@
                 style="color: black"
               >
                 <span
-                  th:text="${#strings.abbreviate(content.addText, 100)}"
+                  th:text="${content.addText != null and content.addText.length() > 100 ? #strings.substring(content.addText, 0, 100) + '...' : content.addText}"
                 ></span>
               </a>
             </div>
@@ -448,5 +494,49 @@
       src="https://kit.fontawesome.com/109a493327.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+  // Function to highlight the current navigation link with animation
+  function highlightCurrentLink() {
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll('#navbar-div ul li a, #sidebar ul li a, .dropdown-content a');
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active-link', 'active');
+      
+      const linkUrl = link.href;
+      
+      // Check exact match or category match
+      if (currentUrl === linkUrl || 
+          (currentUrl.includes('/category?category=') && 
+           linkUrl.includes('/category?category=') &&
+           new URL(currentUrl).searchParams.get('category') === 
+           new URL(linkUrl).searchParams.get('category'))) {
+        link.classList.add('active-link', 'active');
+        
+        // Also highlight the parent dropdown button if this is a dropdown item
+        const dropdown = link.closest('.dropdown-content');
+        if (dropdown) {
+          const dropbtn = dropdown.previousElementSibling;
+          if (dropbtn && dropbtn.classList.contains('dropbtn')) {
+            dropbtn.classList.add('active-link', 'active');
+          }
+        }
+      }
+    });
+  }
+  
+  // Add hover effects to all nav links
+  function addHoverEffects() {
+    const navLinks = document.querySelectorAll('#navbar-div ul li a, #sidebar ul li a, .dropdown-content a');
+    navLinks.forEach(link => {
+      link.classList.add('active-link');
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    highlightCurrentLink();
+    addHoverEffects();
+  });
+</script>
   </body>
 </html>
